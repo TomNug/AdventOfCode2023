@@ -16,7 +16,8 @@ public class Program
     public static void Main(string[] args)
     {
         string testPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 1 - Trebuchet\Test.txt";
-        string[] instructions = System.IO.File.ReadAllLines(testPath);
+        string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 1 - Trebuchet\Full.txt";
+        string[] instructions = System.IO.File.ReadAllLines(fullPath);
 
         int sum = 0;
         foreach (string instruction in instructions)
