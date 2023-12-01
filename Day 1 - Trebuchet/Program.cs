@@ -32,7 +32,7 @@ public class Program
         };
 
         // Isolate "digit"
-        string pattern = @"(\d|one|two|three|four|five|six|seven|eight|nine|ten)";
+        string pattern = @"(\d|one|two|three|four|five|six|seven|eight|nine)";
         
         // Caculate integer values
         string firstMatch = Regex.Match(original, pattern).Value;
