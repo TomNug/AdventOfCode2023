@@ -4,13 +4,11 @@ public class Program
 {
     public static int ExtractNumber(string original)
     {
-        // Isolate first digit
-        string patternFirst = @"\d+";
-        // Isolate last digit
-        string patternLast = @"(\d)[^\d]*$";
+        // Isolate digit
+        string pattern = @"\d";
         // Combine
-        char[] chars = { Regex.Match(original, patternFirst).Value[0], 
-            Regex.Match(original, patternLast).Value[0] };
+        char[] chars = { Regex.Match(original, pattern).Value[0], 
+            Regex.Match(original, pattern, RegexOptions.RightToLeft).Value[0] };
         // Return as int
         return Convert.ToInt32(new string(chars));
     }
@@ -69,7 +67,7 @@ public class Program
         {
             sum += ExtractNumberWords(instruction);
         }
-        Console.WriteLine(String.Format("Part 2: Final sum is {0}", sum));
+        Console.WriteLine(String.Format("Final sum is {0}", sum));
     }
     public static void Main(string[] args)
     {
