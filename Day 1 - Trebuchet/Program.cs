@@ -4,13 +4,15 @@ public class Program
 {
     public static int ExtractNumber(string original)
     {
+        // Isolate first digit
         string patternFirst = @"\d+";
-        char first = Regex.Match(original, patternFirst).Value[0];
+        // Isolate last digit
         string patternLast = @"(\d)[^\d]*$";
-        char last = Regex.Match(original, patternLast).Value[0];
-        char[] chars = {first,last};
-        string s = new string(chars);
-        return Convert.ToInt32(s);
+        // Combine
+        char[] chars = { Regex.Match(original, patternFirst).Value[0], 
+            Regex.Match(original, patternLast).Value[0] };
+        // Return as int
+        return Convert.ToInt32(new string(chars));
     }
 
     public static void Main(string[] args)
