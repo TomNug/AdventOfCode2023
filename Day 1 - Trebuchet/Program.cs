@@ -7,7 +7,7 @@ public class Program
         // Isolate digit
         string pattern = @"\d";
         // Combine
-        char[] chars = { Regex.Match(original, pattern).Value[0], 
+        char[] chars = { Regex.Match(original, pattern).Value[0],
             Regex.Match(original, pattern, RegexOptions.RightToLeft).Value[0] };
         // Return as int
         return Convert.ToInt32(new string(chars));
@@ -33,7 +33,7 @@ public class Program
 
         // Isolate "digit"
         string pattern = @"(\d|one|two|three|four|five|six|seven|eight|nine)";
-        
+
         // Caculate integer values
         string firstMatch = Regex.Match(original, pattern).Value;
         int firstValue = Char.IsDigit(firstMatch[0]) ? Convert.ToInt32(firstMatch) : numberValues[firstMatch];
@@ -42,7 +42,7 @@ public class Program
         int lastValue = Char.IsDigit(secondMatch[0]) ? Convert.ToInt32(secondMatch) : numberValues[secondMatch];
 
         // Combine to two digit number
-        return firstValue *10 + lastValue;
+        return firstValue * 10 + lastValue;
     }
 
 
