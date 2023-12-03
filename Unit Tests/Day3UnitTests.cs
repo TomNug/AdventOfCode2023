@@ -46,8 +46,8 @@ namespace Unit_Tests
 
 
         [Theory]
-        [InlineData(5, new string[] { "467.", "...*", "..35", "...." }, '4', '.', '*', '5', '.', '.', '.', '.')]
-        public void Day3_Gear_ParseEngineArray_2DArrayPopulate(int dummy, string[] lines, 
+        [InlineData(new string[] { "467.", "...*", "..35", "...." }, '4', '.', '*', '5', '.', '.', '.', '.')]
+        public void Day3_Gear_ParseEngineArray_2DArrayPopulate(string[] lines, 
             char expFirstLeft, char expFirstRight,
             char expSecondRight, char expThirdRight, char expLastRight,
             char expLastLeft, char expThirdLeft, char expSecondLeft)
