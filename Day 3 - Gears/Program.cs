@@ -138,8 +138,8 @@ namespace Day3
         public static void Main(string[] args)
         {
             string samplePath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 3 - Gears\Sample.txt";
-            string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 2 - Cube Game\Full.txt";
-            string[] instructions = System.IO.File.ReadAllLines(samplePath);
+            string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 3 - Gears\Full.txt";
+            string[] instructions = System.IO.File.ReadAllLines(fullPath);
             Part1Solution(instructions);
             Part2Solution(instructions);
         }
