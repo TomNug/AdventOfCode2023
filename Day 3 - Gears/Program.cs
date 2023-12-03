@@ -5,10 +5,16 @@ namespace Day3
     
     public class Gears
     {
-        public char[,] ParseEngineArray(string[] lines)
+        public static char[,] ParseEngineArray(string[] lines)
         {
-            List<List<char>> list2D = new List<List<char>>();
-            return new char[2, 1] { { '1' }, { '2' } };
+            char[,] grid = new char[lines.Length, lines[0].Length];
+            for(int i = 0; i < lines.Length;i++)
+            {
+                char[] line = ParseLine(lines[i]);
+                for (int j = 0; j < line.Length; j++)
+                    grid[i, j] = line[j];
+            }
+            return grid;
         }
 
         public static char[] ParseLine(string line)
