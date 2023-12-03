@@ -150,6 +150,30 @@ namespace Unit_Tests
             res33.Should().Be(exp33);
         }
 
+        [Theory]
+        [InlineData(new string[] { "#67.", "...*", "..35", "...." }, 21)]
+        [InlineData(new string[] { "#67.", "...*", "..35", "...." }, 5)]
+        public void Day3_Engine_SumIncluded_ReturnIntSum(string[] lines,
+            int expected)
+        {
+            // Arrange
+            var grid = Day3.Gears.ParseEngineArray(lines);
+            Engine engine = new Engine(grid);
+            engine.UpdateIncluded();
+
+
+            // Act
+            var result = engine.SumIncluded();
+
+            // Assert
+            result.Should().Be(expected);
+            result.Should().BeOfType(typeof(int));
+            result.Should().BeGreaterThanOrEqualTo(0);
+        }
+
+
+
+
 
     }
 }
