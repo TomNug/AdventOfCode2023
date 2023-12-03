@@ -105,6 +105,7 @@ namespace Unit_Tests
             // Arrange
             var grid = Day3.Gears.ParseEngineArray(lines);
             Engine engine = new Engine(grid);
+            engine.UpdateIncluded();
 
             // Act
             var res00 = engine.IsIncluded(0, 0);
