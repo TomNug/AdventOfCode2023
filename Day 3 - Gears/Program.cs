@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Day3
 {
@@ -31,15 +32,48 @@ namespace Day3
             }
         }
 
-        public int SumIncluded()
+        public int CalcSumIncluded()
         {
             int sum = 0;
+
             for (int i = 0; i < symbols.GetLength(0); i++)
             {
+                bool readingNumber = false;
+                bool numberIsIncluded = false;
+                StringBuilder sb = new StringBuilder();
+
                 for (int j = 0; j < symbols.GetLength(1); j++)
                 {
-                    if (included[i, j] && char.IsDigit(symbols[i, j]))
-                        sum += int.Parse(symbols[i, j].ToString());
+                    // Finding the start of a number
+                    if (!readingNumber && char.IsDigit(symbols[i, j])){
+                        readingNumber = true;
+                        sb.Append(symbols[i, j]);
+                    }
+                    // Was reading a number, now ended
+                    else if (readingNumber && !char.IsDigit(symbols[i, j]))
+                    {
+                        readingNumber = false;
+                        if (numberIsIncluded && sb.Length > 0)
+                        {
+                            numberIsIncluded = false;
+                            sum += int.Parse(sb.ToString());
+                        }
+                        sb.Clear();
+                    }
+                    // Continuing to read a number
+                    else if (readingNumber && char.IsDigit(symbols[i, j])){
+                        sb.Append(symbols[i, j]);
+                    }
+                    
+                    if (readingNumber && included[i, j])
+                        numberIsIncluded = true;
+                    // End of row
+                    if (j == symbols.GetLength(1) - 1)
+                    {
+                        if (numberIsIncluded && sb.Length > 0)
+                            sum += int.Parse(sb.ToString());
+                        sb.Clear();
+                    }
                 }
             }
             return sum;
@@ -91,9 +125,9 @@ namespace Day3
             char[,] grid = ParseEngineArray(instructions);
             Engine engine = new Engine(grid);
             engine.UpdateIncluded();
-
+            int sumOfIncluded = engine.CalcSumIncluded();
             Console.WriteLine("\n%%% Part 1 %%%");
-            Console.WriteLine(String.Format("Final sum of part numbers is {0}", 0));
+            Console.WriteLine(String.Format("Final sum of included part numbers is {0}", sumOfIncluded));
         }
 
         public static void Part2Solution(string[] instructions)

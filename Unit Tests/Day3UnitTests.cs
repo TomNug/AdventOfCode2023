@@ -151,7 +151,8 @@ namespace Unit_Tests
         }
 
         [Theory]
-        [InlineData(new string[] { "#67.", "...*", "..35", "...." }, 21)]
+        [InlineData(new string[] { "467.", "...*", "35..", "...." }, 467)]
+        [InlineData(new string[] { "13..", "1*1.", "...7", "..8+" }, 30)]
         public void Day3_Engine_SumIncluded_ReturnIntSum(string[] lines,
             int expected)
         {
@@ -162,7 +163,7 @@ namespace Unit_Tests
 
 
             // Act
-            var result = engine.SumIncluded();
+            var result = engine.CalcSumIncluded();
 
             // Assert
             result.Should().Be(expected);
