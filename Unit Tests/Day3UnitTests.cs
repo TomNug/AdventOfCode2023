@@ -172,7 +172,7 @@ namespace Unit_Tests
         }
 
 
-        public static IEnumerable<Object[]> Day3_Gear_FindGears_PopulateListOfGears_Data()
+        public static IEnumerable<Object[]> Day3_Engine_FindGears_PopulateListOfGears_Data()
         {
             yield return new Object[] { new string[] { "467.", "...*", "35..", "...." }, 
                 new List<Gear> {new Gear(1, 3) } };
@@ -181,7 +181,7 @@ namespace Unit_Tests
         }
         [Theory]
         [MemberData(nameof(Day3_Gear_FindGears_PopulateListOfGears_Data))]
-        public void Day3_Gear_FindGears_PopulateListOfGears(string[] lines,
+        public void Day3_Engine_FindGears_PopulateListOfGears(string[] lines,
             List<Gear> expectedGears)
         {
             // Arrange
@@ -263,5 +263,48 @@ namespace Unit_Tests
             res33.Should().Be(exp33);
         }
 
+
+
+        public static IEnumerable<Object[]> Day3_Gear_FindGears_PopulateListOfGears_Data()
+        {
+            yield return new Object[] { new string[] { "467.", "...*", "35..", "...." },
+                new List<Gear> {new Gear(1, 3, new List<int> { 467 }) } };
+            yield return new Object[] { new string[] { "13..", "1*1.", "...7", "..8*" },
+                new List<Gear> {new Gear(1, 1, new List<int> { 13, 1, 1 }) ,
+                new Gear(3, 3, new List<int> { 7, 8 }) }};
+            yield return new Object[] { new string[] { "*1.", "2..", "3*4" },
+                new List<Gear> {new Gear(0, 0, new List<int> { 1, 2 }) ,
+                new Gear(2, 1, new List<int> { 2, 3, 4 }) }};
+        }
+        [Theory]
+        [MemberData(nameof(Day3_Gear_FindGears_PopulateListOfGears_Data))]
+        public void Day3_Engine_CalcGearAdjacentNumbers_PopulateListOfAdjacentNums(string[] lines,
+            List<Gear> expectedGears)
+        {
+            // Arrange
+            var grid = Day3.GearRatios.ParseEngineArray(lines);
+            Engine engine = new Engine(grid);
+
+
+
+            // Act
+            engine.FindGears();
+            engine.CalcGearAdjacentNumbers();
+            
+            List<Gear> resultGears = engine.gears;
+
+            // Assert
+            resultGears.Count.Should().Be(expectedGears.Count);
+            for (int i = 0; i < expectedGears.Count; i++)
+            {
+                // Should be same number of gears in each Engine
+                resultGears[i].adjacentNumbers.Count.Should().Be(expectedGears[i].adjacentNumbers.Count);
+                for (int j = 0; j < resultGears[i].adjacentNumbers.Count; j++)
+                {
+                    // Each number should be equal
+                    resultGears[i].adjacentNumbers[j].Should().Be(expectedGears[i].adjacentNumbers[j]);
+                }
+            }
+        }
     }
 }

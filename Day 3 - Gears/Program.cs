@@ -5,18 +5,31 @@ namespace Day3
 {
     public class Gear
     {
-        private List<(int,int)> adjacentNumbers { get; set; }
+        public List<int> adjacentNumbers { get; set; }
         public int row { get; set; }
         public int col { get; set; }
         public Gear(int newRow, int newCol)
         {
             row = newRow;
             col = newCol;
+            adjacentNumbers = new List<int>();
         }
-        public void AddAdjacent(int row, int col)
+        public Gear(int newRow, int newCol, List<int> newAdjacentNumbers)
         {
-            adjacentNumbers.Add((row, col));
+            row = newRow;
+            col = newCol;
+            adjacentNumbers = newAdjacentNumbers;
         }
+        public void AddAdjacent(int number)
+        {
+            adjacentNumbers.Add(number);
+        }
+        // Tests if a point is adjacent to this gear
+        public bool AdjacencyTest(int testRow, int testCol)
+        {
+            return (Math.Abs(testRow - row) <= 1 && Math.Abs(testCol - col) <= 1);
+        }
+
     }
     public class Engine
     {
@@ -116,6 +129,62 @@ namespace Day3
                 }
             }
             return sum;
+        }
+        
+        public void CalcGearAdjacentNumbers()
+        {
+            foreach(Gear gear in gears)
+            {
+                int minRow = Math.Max(gear.row - 1, 0);
+                int maxRow = Math.Min(gear.row + 1, symbols.GetLength(0) - 1);
+                // Only need to scan line above and below
+                for (int i = minRow; i <= maxRow; i++)
+                {
+                    bool readingNumber = false;
+                    bool numberIsAdjacent = false;
+                    StringBuilder sb = new StringBuilder();
+
+                    for (int j = 0; j < symbols.GetLength(1); j++)
+                    {
+                        
+
+                        // Finding the start of a number
+                        if (!readingNumber && char.IsDigit(symbols[i, j]))
+                        {
+                            if (gear.AdjacencyTest(i, j))
+                                numberIsAdjacent = true;
+                            readingNumber = true;
+                            sb.Append(symbols[i, j]);
+                        }
+                        // Was reading a number, now ended
+                        else if (readingNumber && !char.IsDigit(symbols[i, j]))
+                        {
+                            readingNumber = false;
+                            if (numberIsAdjacent && sb.Length > 0)
+                            {
+                                numberIsAdjacent = false;
+                                gear.AddAdjacent(int.Parse(sb.ToString()));
+                            }
+                            sb.Clear();
+                        }
+                        // Continuing to read a number
+                        else if (readingNumber && char.IsDigit(symbols[i, j]))
+                        {
+                            if (gear.AdjacencyTest(i, j))
+                                numberIsAdjacent = true;
+                            sb.Append(symbols[i, j]);
+                        }
+                        // End of row
+                        if (j == symbols.GetLength(1) - 1)
+                        {
+                            if (numberIsAdjacent && sb.Length > 0)
+                                gear.AddAdjacent(int.Parse(sb.ToString()));
+                            sb.Clear();
+                        }
+                    }
+                }
+            }
+
         }
         public void SpreadProperty(bool[,] array, int row, int col)
         {
