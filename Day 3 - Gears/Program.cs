@@ -5,8 +5,16 @@ namespace Day3
     
     public class Gears
     {
+        public char[,] ParseEngineArray(string[] lines)
+        {
+            List<List<char>> list2D = new List<List<char>>();
+            return new char[2, 1] { { '1' }, { '2' } };
+        }
 
-
+        public static char[] ParseLine(string line)
+        {
+            return new char[] {'1'};
+        }
         public static void Part1Solution(string[] instructions)
         {
             Console.WriteLine("\n%%% Part 1 %%%");
