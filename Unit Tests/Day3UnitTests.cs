@@ -105,7 +105,7 @@ namespace Unit_Tests
             // Arrange
             var grid = Day3.GearRatios.ParseEngineArray(lines);
             Engine engine = new Engine(grid);
-            engine.UpdateIncluded();
+            engine.UpdateFlags();
 
             // Act
             var res00 = engine.IsIncluded(0, 0);
@@ -159,7 +159,7 @@ namespace Unit_Tests
             // Arrange
             var grid = Day3.GearRatios.ParseEngineArray(lines);
             Engine engine = new Engine(grid);
-            engine.UpdateIncluded();
+            engine.UpdateFlags();
 
 
             // Act
@@ -203,7 +203,65 @@ namespace Unit_Tests
             }
         }
 
+        [Theory]
+        [InlineData(new string[] { "_6*.", "...*", "..35", "...." },
+            false, true, true, true,
+            false, true, true, true,
+            false, false, true, true,
+            false, false, false, false)]
+        public void Day3_Engine_UpdateFlags_BoolsRepresentAdjacencyToGears(string[] lines,
+            bool exp00, bool exp01, bool exp02, bool exp03,
+            bool exp10, bool exp11, bool exp12, bool exp13,
+            bool exp20, bool exp21, bool exp22, bool exp23,
+            bool exp30, bool exp31, bool exp32, bool exp33)
+        {
+            // Arrange
+            var grid = Day3.GearRatios.ParseEngineArray(lines);
+            Engine engine = new Engine(grid);
+            engine.UpdateFlags();
 
+            // Act
+            var res00 = engine.IsAdjacentToGear(0, 0);
+            var res01 = engine.IsAdjacentToGear(0, 1);
+            var res02 = engine.IsAdjacentToGear(0, 2);
+            var res03 = engine.IsAdjacentToGear(0, 3);
+
+            var res10 = engine.IsAdjacentToGear(1, 0);
+            var res11 = engine.IsAdjacentToGear(1, 1);
+            var res12 = engine.IsAdjacentToGear(1, 2);
+            var res13 = engine.IsAdjacentToGear(1, 3);
+
+            var res20 = engine.IsAdjacentToGear(2, 0);
+            var res21 = engine.IsAdjacentToGear(2, 1);
+            var res22 = engine.IsAdjacentToGear(2, 2);
+            var res23 = engine.IsAdjacentToGear(2, 3);
+
+            var res30 = engine.IsAdjacentToGear(3, 0);
+            var res31 = engine.IsAdjacentToGear(3, 1);
+            var res32 = engine.IsAdjacentToGear(3, 2);
+            var res33 = engine.IsAdjacentToGear(3, 3);
+
+            // Assert
+            res00.Should().Be(exp00);
+            res01.Should().Be(exp01);
+            res02.Should().Be(exp02);
+            res03.Should().Be(exp03);
+
+            res10.Should().Be(exp10);
+            res11.Should().Be(exp11);
+            res12.Should().Be(exp12);
+            res13.Should().Be(exp13);
+
+            res20.Should().Be(exp20);
+            res21.Should().Be(exp21);
+            res22.Should().Be(exp22);
+            res23.Should().Be(exp23);
+
+            res30.Should().Be(exp30);
+            res31.Should().Be(exp31);
+            res32.Should().Be(exp32);
+            res33.Should().Be(exp33);
+        }
 
     }
 }

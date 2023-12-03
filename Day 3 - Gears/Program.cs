@@ -43,7 +43,7 @@ namespace Day3
             }
             gears = new List<Gear>();
         }
-        public void UpdateIncluded()
+        public void UpdateFlags()
         {
             for (int i = 0; i < symbols.GetLength(0); i++)
             {
@@ -51,10 +51,11 @@ namespace Day3
                 {
                     if (symbols[i, j] != '.' && !char.IsDigit(symbols[i, j]))
                         SpreadProperty(included, i, j);
+                    if (symbols[i, j] == '*')
+                        SpreadProperty(adjacentToGear, i, j);
                 }
             }
         }
-
         public void FindGears()
         {
             for (int i = 0; i < symbols.GetLength(0); i++)
@@ -132,7 +133,6 @@ namespace Day3
             SetFlag(array, row + 1, col);
             SetFlag(array, row + 1, col + 1);
         }
-
         private void SetFlag(bool[,] array, int row, int col)
         {
             int numRows = array.GetLength(0);
@@ -143,11 +143,13 @@ namespace Day3
 
             array[validRow, validCol] = true;
         }
-
-
         public bool IsIncluded(int row, int col)
         {
             return included[row, col];
+        }
+        public bool IsAdjacentToGear(int row, int col)
+        {
+            return adjacentToGear[row, col];
         }
     }
     public class GearRatios
@@ -172,7 +174,7 @@ namespace Day3
         {
             char[,] grid = ParseEngineArray(instructions);
             Engine engine = new Engine(grid);
-            engine.UpdateIncluded();
+            engine.UpdateFlags();
             int sumOfIncluded = engine.CalcSumIncluded();
             Console.WriteLine("\n%%% Part 1 %%%");
             Console.WriteLine(String.Format("Final sum of included part numbers is {0}", sumOfIncluded));
