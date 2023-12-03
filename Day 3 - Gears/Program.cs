@@ -3,22 +3,45 @@ using System.Text.RegularExpressions;
 
 namespace Day3
 {
+    public class Gear
+    {
+        private List<(int,int)> adjacentNumbers { get; set; }
+        public int row { get; set; }
+        public int col { get; set; }
+        public Gear(int newRow, int newCol)
+        {
+            row = newRow;
+            col = newCol;
+        }
+        public void AddAdjacent(int row, int col)
+        {
+            adjacentNumbers.Add((row, col));
+        }
+    }
     public class Engine
     {
         public char[,] symbols { get; set; }
         // Highlights if a number is adjacent to a symbol
         private bool[,] included { get; set; }
+        private bool[,] adjacentToGear { get; set; }
+        public List<Gear> gears { get; set; }
+        // Determines which numbers are gears
+        private bool[,] potentialPartOfGear { get; set; }
+
         public Engine(char[,] grid)
         {
             symbols = grid;
             included = new bool[grid.GetLength(0), grid.GetLength(1)];
+            adjacentToGear = new bool[grid.GetLength(0), grid.GetLength(1)];
             for (int i = 0; i < symbols.GetLength(0); i++)
             {
                 for (int j = 0; j<symbols.GetLength(1); j++)
                 {
                     included[i, j] = false;
+                    adjacentToGear[i, j] = false;
                 }
             }
+            gears = new List<Gear>();
         }
         public void UpdateIncluded()
         {
@@ -27,11 +50,26 @@ namespace Day3
                 for (int j = 0; j< symbols.GetLength(1); j++)
                 {
                     if (symbols[i, j] != '.' && !char.IsDigit(symbols[i, j]))
-                        SpreadIncluded(i, j);
+                        SpreadProperty(included, i, j);
                 }
             }
         }
 
+        public void FindGears()
+        {
+            for (int i = 0; i < symbols.GetLength(0); i++)
+            {
+                for (int j = 0; j < symbols.GetLength(1); j++)
+                {
+                    if (symbols[i, j] == '*')
+                    {
+                        Gear newGear = new Gear(i, j);
+                        gears.Add(newGear);
+                        SpreadProperty(adjacentToGear, i, j);
+                    }
+                }
+            }
+        }
         public int CalcSumIncluded()
         {
             int sum = 0;
@@ -78,31 +116,41 @@ namespace Day3
             }
             return sum;
         }
-        public void SpreadIncluded(int row, int col)
+        public void SpreadProperty(bool[,] array, int row, int col)
         {
-            // NW
-            included[Math.Max(row - 1, 0), Math.Max(col - 1,0)] = true;
-            // N
-            included[Math.Max(row - 1, 0), col] = true;
-            // NE
-            included[Math.Max(row - 1, 0), Math.Min(col + 1, included.GetLength(1)-1)] = true;
-            // W
-            included[row, Math.Max(col - 1, 0)] = true;
-            // E
-            included[row, Math.Min(col + 1, included.GetLength(1) - 1)] = true;
-            // SW
-            included[Math.Min(row + 1, included.GetLength(0) - 1), Math.Max(col - 1, 0)] = true;
-            // S
-            included[Math.Min(row + 1, included.GetLength(0)-1), col] = true;
-            // SE
-            included[Math.Min(row + 1, included.GetLength(0)-1), Math.Min(col + 1, included.GetLength(1)-1)] = true;
+            int numRows = array.GetLength(0);
+            int numCols = array.GetLength(1);
+
+            SetFlag(array, row - 1, col - 1);
+            SetFlag(array, row - 1, col);
+            SetFlag(array, row - 1, col + 1);
+
+            SetFlag(array, row, col - 1);
+            SetFlag(array, row, col + 1);
+
+            SetFlag(array, row + 1, col - 1);
+            SetFlag(array, row + 1, col);
+            SetFlag(array, row + 1, col + 1);
         }
+
+        private void SetFlag(bool[,] array, int row, int col)
+        {
+            int numRows = array.GetLength(0);
+            int numCols = array.GetLength(1);
+
+            int validRow = Math.Max(0, Math.Min(row, numRows - 1));
+            int validCol = Math.Max(0, Math.Min(col, numCols - 1));
+
+            array[validRow, validCol] = true;
+        }
+
+
         public bool IsIncluded(int row, int col)
         {
             return included[row, col];
         }
     }
-    public class Gears
+    public class GearRatios
     {
         public static char[,] ParseEngineArray(string[] lines)
         {
@@ -133,13 +181,16 @@ namespace Day3
         public static void Part2Solution(string[] instructions)
         {
             Console.WriteLine("\n%%% Part 2 %%%");
+            char[,] grid = ParseEngineArray(instructions);
+            Engine engine = new Engine(grid);
+            engine.FindGears();
             Console.WriteLine(String.Format("Final sum of power is {0}", 0));
         }
         public static void Main(string[] args)
         {
             string samplePath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 3 - Gears\Sample.txt";
             string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 3 - Gears\Full.txt";
-            string[] instructions = System.IO.File.ReadAllLines(fullPath);
+            string[] instructions = System.IO.File.ReadAllLines(samplePath);
             Part1Solution(instructions);
             Part2Solution(instructions);
         }

@@ -26,7 +26,7 @@ namespace Unit_Tests
         {
             // Arrange
             // Act
-            var result = Day3.Gears.ParseLine(line);
+            var result = Day3.GearRatios.ParseLine(line);
             var first = result[0];
             var second = result[1];
             var penultimate = result[result.Length - 2];
@@ -56,7 +56,7 @@ namespace Unit_Tests
             // Arrange
 
             // Act
-            var grid = Day3.Gears.ParseEngineArray(lines);
+            var grid = Day3.GearRatios.ParseEngineArray(lines);
             var resTopLeft = grid[0, 0];
             var resTopRight = grid[0,grid.GetLength(1)-1];
             var resSecondLeft = grid[1, 0];
@@ -103,7 +103,7 @@ namespace Unit_Tests
             bool exp30, bool exp31, bool exp32, bool exp33)
         {
             // Arrange
-            var grid = Day3.Gears.ParseEngineArray(lines);
+            var grid = Day3.GearRatios.ParseEngineArray(lines);
             Engine engine = new Engine(grid);
             engine.UpdateIncluded();
 
@@ -157,7 +157,7 @@ namespace Unit_Tests
             int expected)
         {
             // Arrange
-            var grid = Day3.Gears.ParseEngineArray(lines);
+            var grid = Day3.GearRatios.ParseEngineArray(lines);
             Engine engine = new Engine(grid);
             engine.UpdateIncluded();
 
@@ -172,6 +172,36 @@ namespace Unit_Tests
         }
 
 
+        public static IEnumerable<Object[]> Day3_Gear_FindGears_PopulateListOfGears_Data()
+        {
+            yield return new Object[] { new string[] { "467.", "...*", "35..", "...." }, 
+                new List<Gear> {new Gear(1, 3) } };
+            yield return new Object[] { new string[] { "13..", "1*1.", "...7", "..8*" },
+                new List<Gear> {new Gear(1, 1), new Gear(3, 3) } };
+        }
+        [Theory]
+        [MemberData(nameof(Day3_Gear_FindGears_PopulateListOfGears_Data))]
+        public void Day3_Gear_FindGears_PopulateListOfGears(string[] lines,
+            List<Gear> expectedGears)
+        {
+            // Arrange
+            var grid = Day3.GearRatios.ParseEngineArray(lines);
+            Engine engine = new Engine(grid);
+
+
+
+            // Act
+            engine.FindGears();
+            List<Gear> gearsResult = engine.gears;
+            // Assert
+            
+            gearsResult.Count.Should().Be(expectedGears.Count);
+            for (int i = 0; i < expectedGears.Count; i++)
+            {
+                gearsResult[i].row.Should().Be(expectedGears[i].row);
+                gearsResult[i].col.Should().Be(expectedGears[i].col);
+            }
+        }
 
 
 
