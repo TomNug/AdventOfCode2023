@@ -152,7 +152,6 @@ namespace Unit_Tests
 
         [Theory]
         [InlineData(new string[] { "#67.", "...*", "..35", "...." }, 21)]
-        [InlineData(new string[] { "#67.", "...*", "..35", "...." }, 5)]
         public void Day3_Engine_SumIncluded_ReturnIntSum(string[] lines,
             int expected)
         {

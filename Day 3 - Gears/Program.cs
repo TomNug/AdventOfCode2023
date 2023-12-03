@@ -33,7 +33,16 @@ namespace Day3
 
         public int SumIncluded()
         {
-            return 5;
+            int sum = 0;
+            for (int i = 0; i < symbols.GetLength(0); i++)
+            {
+                for (int j = 0; j < symbols.GetLength(1); j++)
+                {
+                    if (included[i, j] && char.IsDigit(symbols[i, j]))
+                        sum += int.Parse(symbols[i, j].ToString());
+                }
+            }
+            return sum;
         }
         public void SpreadIncluded(int row, int col)
         {
