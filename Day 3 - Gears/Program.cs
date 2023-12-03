@@ -13,7 +13,7 @@ namespace Day3
 
         public static char[] ParseLine(string line)
         {
-            return new char[] {'1'};
+            return line.ToCharArray();
         }
         public static void Part1Solution(string[] instructions)
         {
