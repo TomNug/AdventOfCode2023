@@ -29,7 +29,16 @@ namespace Day3
         {
             return (Math.Abs(testRow - row) <= 1 && Math.Abs(testCol - col) <= 1);
         }
-
+        public int GetGearRatio()
+        {
+            int product = 1;
+            if (adjacentNumbers.Count == 2)
+            {
+                foreach (int num in adjacentNumbers)
+                    product *= num;
+            }
+            return product > 1 ? product : 0;
+        }
     }
     public class Engine
     {
@@ -220,6 +229,13 @@ namespace Day3
         {
             return adjacentToGear[row, col];
         }
+        public int GetSumOfAllGearRatios()
+        {
+            int sumGearRatios = 0;
+            foreach (Gear gear in gears)
+                sumGearRatios += gear.GetGearRatio();
+            return sumGearRatios;
+        }
     }
     public class GearRatios
     {
@@ -255,13 +271,16 @@ namespace Day3
             char[,] grid = ParseEngineArray(instructions);
             Engine engine = new Engine(grid);
             engine.FindGears();
-            Console.WriteLine(String.Format("Final sum of power is {0}", 0));
+            engine.UpdateFlags();
+            engine.CalcGearAdjacentNumbers();
+            int sumOfGearRatios = engine.GetSumOfAllGearRatios();
+            Console.WriteLine(String.Format("The sum of all gear ratios is {0}", sumOfGearRatios));
         }
         public static void Main(string[] args)
         {
             string samplePath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 3 - Gears\Sample.txt";
             string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 3 - Gears\Full.txt";
-            string[] instructions = System.IO.File.ReadAllLines(samplePath);
+            string[] instructions = System.IO.File.ReadAllLines(fullPath);
             Part1Solution(instructions);
             Part2Solution(instructions);
         }
