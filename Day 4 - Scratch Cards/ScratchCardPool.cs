@@ -30,7 +30,7 @@ namespace Day4
                 ScratchCard card = scratchCardList[cardIndex];
 
                 // Add that any cards to the pool
-                int matches = card.GetNumMatches();
+                int matches = card.NumWinners;
 
                 for (int i = 1; i <= matches; i++)
                     scratchCardList.Add(scratchCardDict[card.Number + i]);

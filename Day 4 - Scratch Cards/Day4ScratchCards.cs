@@ -13,7 +13,7 @@ namespace Day4
             {
                 ScratchCard newCard = new ScratchCard(instruction);
                 //cards.Add(newCard);
-                sumPoints += newCard.GetPoints();
+                sumPoints += newCard.Points;
                 int x = 5;
             }
             Console.WriteLine(String.Format("The total points from the scratch cards is {0}", sumPoints));
