@@ -10,3 +10,6 @@ Further practise with **regex**. Using **xUnit** to implement tests for Day 1. U
 
 ## Day 3 - Parsing a grid of characters to identify larger numbers within and proximity to specific symbols
 **Test-driven development** where tests are created before the implementation helped my understanding of the problem and each stage. Used **MemberData** in **xUnit** to allow for more complext test data.
+
+## Day 4 - Parsing strings to identify sets of numbers and performing calculations based on the intersections
+More **test-driven development** helped with the process. Made progress in secure increments and was confident in my code. More complex **regex** patterns, so more good practise. Using **sets** and **intersections** to find crossover between numbers.
