@@ -14,7 +14,7 @@ namespace Day4
         public HashSet<int> Numbers { get; set; }
         public ScratchCard(string input)
         {
-            string scratchCardPattern = @"Card (\d+): ((\s*(\d{1,2}))+) \| ((\s*(\d{1,2}))+)";
+            string scratchCardPattern = @"Card\s+(\d+): ((\s*(\d{1,2}))+) \| ((\s*(\d{1,2}))+)";
             Match match = Regex.Match(input, scratchCardPattern);
             Number = int.Parse(match.Groups[1].Value);
             WinningNumbers = new HashSet<int>(ExtractDigits(match.Groups[2].Value));
@@ -29,6 +29,13 @@ namespace Day4
             foreach (Match match in matches)
                 result.Add(int.Parse(match.Value));
             return result;
+        }
+
+        public int GetPoints()
+        {
+            HashSet<int> winners = new HashSet<int>(Numbers);
+            winners.IntersectWith(WinningNumbers);
+            return winners.Count > 0 ? Convert.ToInt32(Math.Pow(2,winners.Count - 1)) : 0;
         }
     }
 }
