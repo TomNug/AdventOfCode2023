@@ -2,22 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Day_4___Scratch_Cards
+namespace Day4
 {
     public class ScratchCard
     {
         public int Number { get; set; }
         public HashSet<int> WinningNumbers { get; set; }
         public HashSet<int> Numbers { get; set; }
-        public ScratchCard(int number, List<int> winningNumbers, List<int> numbers)
+        public ScratchCard(string input)
         {
-            Number = number;
-            foreach (int num in winningNumbers)
-                WinningNumbers.Add(num);
-            foreach (int num in numbers)
-                Numbers.Add(num);
+            string scratchCardPattern = @"Card (\d+): ((\s*(\d{1,2}))+) \| ((\s*(\d{1,2}))+)";
+            Match match = Regex.Match(input, scratchCardPattern);
+            Number = int.Parse(match.Groups[1].Value);
+            WinningNumbers = new HashSet<int>(ExtractDigits(match.Groups[2].Value));
+            Numbers = new HashSet<int>(ExtractDigits(match.Groups[5].Value));
+        }
+
+        static List<int> ExtractDigits(string input)
+        {
+            string digitPattern = @"(\d{1,2})";
+            MatchCollection matches = Regex.Matches(input, digitPattern);
+            List<int> result = new List<int>();
+            foreach (Match match in matches)
+                result.Add(int.Parse(match.Value));
+            return result;
         }
     }
 }

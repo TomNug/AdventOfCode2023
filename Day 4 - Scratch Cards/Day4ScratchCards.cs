@@ -6,8 +6,14 @@ namespace Day4
     {
         public static void Part1Solution(string[] instructions)
         {
+            List<ScratchCard> cards = new List<ScratchCard>();
             Console.WriteLine("\n%%% Part 1 %%%");
-            Console.WriteLine(String.Format("The total points is {0}", 5));
+            foreach(string instruction in instructions)
+            {
+                ScratchCard newCard = new ScratchCard(instruction);
+                cards.Add(newCard);
+            }
+            Console.WriteLine(String.Format("Final sum of included part numbers is {0}", 5));
         }
 
         public static void Part2Solution(string[] instructions)

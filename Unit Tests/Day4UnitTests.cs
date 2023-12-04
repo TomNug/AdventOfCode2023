@@ -19,7 +19,6 @@ namespace Unit_Tests
             yield return new Object[] { "Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11", 6, new HashSet<int> { 31, 18, 13, 56, 72 },
                 new HashSet<int> { 74, 77, 10, 23, 35, 67, 36, 11 } };
         }
-        Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
         [Theory]
         [MemberData(nameof(Day4_ScratchCard_ScratchCard_ScratchCardConstructed_Data))]
         public void Day4_ScratchCard_ScratchCard_ScratchCardConstructed(string line, int expectedCardNum, 
