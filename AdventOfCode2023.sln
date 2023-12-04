@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unit Tests", "Unit Tests\Un
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 2 - Cube Game", "Day 2 - Cube Game\Day 2 - Cube Game.csproj", "{5A2BF91B-3BB5-4A05-A400-B5BA0B7476A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 3 - Gears", "Day 3 - Gears\Day 3 - Gears.csproj", "{FE1A38B6-1CB1-4EB7-B8D0-2881170B6231}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 3 - Gears", "Day 3 - Gears\Day 3 - Gears.csproj", "{FE1A38B6-1CB1-4EB7-B8D0-2881170B6231}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 4 - Scratch Cards", "Day 4 - Scratch Cards\Day 4 - Scratch Cards.csproj", "{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{FE1A38B6-1CB1-4EB7-B8D0-2881170B6231}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FE1A38B6-1CB1-4EB7-B8D0-2881170B6231}.Release|x86.ActiveCfg = Release|Any CPU
 		{FE1A38B6-1CB1-4EB7-B8D0-2881170B6231}.Release|x86.Build.0 = Release|Any CPU
+		{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}.Debug|x86.Build.0 = Debug|Any CPU
+		{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}.Release|x86.ActiveCfg = Release|Any CPU
+		{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

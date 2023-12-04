@@ -28,6 +28,7 @@
     <ProjectReference Include="..\Day 1 - Trebuchet\Day 1 - Trebuchet.csproj" />
     <ProjectReference Include="..\Day 2 - Cube Game\Day 2 - Cube Game.csproj" />
     <ProjectReference Include="..\Day 3 - Gears\Day 3 - Gears.csproj" />
+    <ProjectReference Include="..\Day 4 - Scratch Cards\Day 4 - Scratch Cards.csproj" />
   </ItemGroup>
 
 </Project>
