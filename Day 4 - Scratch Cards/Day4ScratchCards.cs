@@ -22,7 +22,10 @@ namespace Day4
         public static void Part2Solution(string[] instructions)
         {
             Console.WriteLine("\n%%% Part 2 %%%");
-            Console.WriteLine(String.Format("The sum of all gear ratios is {0}", 1));
+            ScratchCardPool pool = new ScratchCardPool(instructions);
+            pool.ScoreAllCards();
+            var numCards = pool.CountNumCards();
+            Console.WriteLine(String.Format("You end up with {0} scratchcards", numCards));
         }
         public static void Main(string[] args)
         {

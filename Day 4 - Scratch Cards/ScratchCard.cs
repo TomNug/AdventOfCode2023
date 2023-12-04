@@ -37,5 +37,12 @@ namespace Day4
             winners.IntersectWith(WinningNumbers);
             return winners.Count > 0 ? Convert.ToInt32(Math.Pow(2,winners.Count - 1)) : 0;
         }
+
+        public int GetNumMatches()
+        {
+            HashSet<int> winners = new HashSet<int>(Numbers);
+            winners.IntersectWith(WinningNumbers);
+            return winners.Count;
+        }
     }
 }
