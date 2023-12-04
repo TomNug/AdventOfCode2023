@@ -1,7 +1,7 @@
 # Day 3
 ## Key Skills: 
 
-- Test-drive development
+- Test-driven development
 - xUnit
   - MemberData for more expansive test data
 - 2D arrays 
