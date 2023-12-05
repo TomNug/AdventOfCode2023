@@ -16,6 +16,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 4 - Scratch Cards", "Day 4 - Scratch Cards\Day 4 - Scratch Cards.csproj", "{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{435CED68-1280-456F-BF39-1064459B2549}"
+	ProjectSection(SolutionItems) = preProject
+		ben.txt = ben.txt
+		bill.txt = bill.txt
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 5 - Mapping Seeds", "Day 5 - Mapping Seeds\Day 5 - Mapping Seeds.csproj", "{9C647A98-048B-4D0A-9AB8-E7D12B232CA0}"
 EndProject
