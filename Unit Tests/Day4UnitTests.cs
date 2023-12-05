@@ -51,7 +51,7 @@ namespace Unit_Tests
             // Arrange
             var scratchCard = new ScratchCard(line);
             // Act
-            var result = scratchCard.GetPoints();
+            var result = scratchCard.Points;
             // Assert
 
             result.Should().Be(expected);
