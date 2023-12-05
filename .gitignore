@@ -4,8 +4,8 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # Advent of Code
-Sample.txt
-Full.txt
+**/Sample.txt
+**/Full.txt
 
 
 # User-specific files
