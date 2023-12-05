@@ -6,27 +6,48 @@ namespace Day5
     public class Day5MapsOfSeeds
     {
         private static List<ConversionMap> conversions = new List<ConversionMap>();
-        private static List<long> seeds = new List<long>();
+        private static HashSet<long> seeds = new HashSet<long>();
+        private static List<(long, long)> seedsFromTo = new List<(long, long)> ();
         public static void ProcessSeeds()
         {
-            // for each step in the conversions
-            foreach (ConversionMap conversion in conversions)
+            // Treat seeds one at a time.
+            // Store the result so we don't need to revist that number
+            Dictionary<long, long> megaMap = new Dictionary<long, long>();
+        
+            // For each seed range
+            foreach((long, long) fromTo in seedsFromTo)
             {
-                // Process each seed
-                for (int seed = 0; seed < seeds.Count; seed++)
+                // For each seed
+                for (long i = fromTo.Item1; i<fromTo.Item2; i++)
                 {
-                    seeds[seed] = conversion.Map(seeds[seed]);
+                    long seedResult = i;
+                    // for each step in the conversions
+                    foreach (ConversionMap conversion in conversions)
+                    {
+                        seedResult = conversion.Map(seedResult);
+                    }
+                    megaMap.Add(i, seedResult);
                 }
             }
+            int x = 5;
+            
         }
 
         public static void ParseMaps(string[] input)
         {
             string patternSeeds = @"seeds:( (\d+))+";
             Match matchSeeds = Regex.Match(input[0], patternSeeds);
+            
+            List<long> seedRanges = new List<long>();
             foreach (Capture capture in matchSeeds.Groups[2].Captures)
             {
-                seeds.Add(long.Parse(capture.Value));
+                seedRanges.Add(long.Parse(capture.Value));
+            }
+            for (int seedRange = 0; seedRange < seedRanges.Count; seedRange+=2)
+            {
+                long from = seedRanges[seedRange];
+                long range = seedRanges[seedRange + 1];
+                seedsFromTo.Add((from, from+range-1));
             }
 
             List<Map> maps = new List<Map>();
@@ -83,7 +104,7 @@ namespace Day5
         {
             string samplePath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Sample.txt";
             string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Full.txt";
-            string[] instructions = System.IO.File.ReadAllLines(fullPath);
+            string[] instructions = System.IO.File.ReadAllLines(samplePath);
             Part1Solution(instructions);
             Part2Solution(instructions);
         }
