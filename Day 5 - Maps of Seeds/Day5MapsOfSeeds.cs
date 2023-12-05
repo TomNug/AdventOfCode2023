@@ -10,9 +10,8 @@ namespace Day5
         private static List<long> seeds = new List<long>();
 
         // Used in part 2
-        private static HashSet<long> seedsHashSet = new HashSet<long>();
         private static List<(long, long)> seedsFromTo = new List<(long, long)> ();
-
+        private static Dictionary<long, long> megaMap = new Dictionary<long, long>();
 
         public static void ProcessSeedsForPart1()
         {
@@ -29,31 +28,59 @@ namespace Day5
         
         
         
-        public static void ProcessSeeds()
+        public static long ProcessSeedsForPart2()
         {
-            // Treat seeds one at a time.
-            // Store the result so we don't need to revist that number
-            Dictionary<long, long> megaMap = new Dictionary<long, long>();
-        
+            // To store the end result ranges from mapping 
+            List<(long, long)> processedRanges = new List<(long, long)>();
+
             // For each seed range
-            foreach((long, long) fromTo in seedsFromTo)
+            foreach ((long, long) range in seedsFromTo)
             {
-                // For each seed
-                for (long i = fromTo.Item1; i<fromTo.Item2; i++)
+                // Working list of ranges
+                // Holds any processed ranged whilst still between maps
+                List<(long, long)> startOfPassRanges = new List<(long, long)>();
+                startOfPassRanges.Add(range);
+
+                List<(long, long)> endOfPassRanges = new List<(long, long)>();
+
+                // for each step in the conversions
+                foreach (ConversionMap conversion in conversions)
                 {
-                    long seedResult = i;
-                    // for each step in the conversions
-                    foreach (ConversionMap conversion in conversions)
-                    {
-                        seedResult = conversion.Map(seedResult);
+                    // For each range to consider
+                    foreach((long, long) processingRange in startOfPassRanges)
+                    { 
+                        endOfPassRanges.AddRange(conversion.MapRange(processingRange));
                     }
-                    megaMap.Add(i, seedResult);
+                    startOfPassRanges = new List<(long,long)>(endOfPassRanges);
+                    endOfPassRanges.Clear();
                 }
+                processedRanges = new List<(long, long)>(startOfPassRanges);
+
             }
-            int x = 5;
+
+            // Find the lowest start of a range
+            long lowest = long.MaxValue;
+            foreach((long,long) range in processedRanges)
+            {
+                if (range.Item1 < lowest)
+                    lowest = range.Item1;
+            }
+            return lowest;
             
         }
 
+        public static long FindLowestForPart2()
+        {
+            long lowest = long.MaxValue;
+            foreach(KeyValuePair<long, long> pair in megaMap)
+            {
+                if (pair.Value < lowest)
+                {
+                    lowest = pair.Value;
+                }
+            }
+            return lowest;
+        }
         public static void ParseMaps(string[] input)
         {
             string patternSeeds = @"seeds:( (\d+))+";
@@ -120,11 +147,13 @@ namespace Day5
         public static void Part2Solution(string[] instructions)
         {
             Console.WriteLine("\n%%% Part 2 %%%");
-            Console.WriteLine(String.Format("You end up with {0} scratchcards", 5));
+            long lowest = ProcessSeedsForPart2();
+            Console.WriteLine(String.Format("The lowest location is {0}", lowest));
         }
         public static void Main(string[] args)
         {
             string samplePath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Sample.txt";
+            string simplerPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Simpler.txt";
             string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Full.txt";
             string[] instructions = System.IO.File.ReadAllLines(samplePath);
             Part1Solution(instructions);

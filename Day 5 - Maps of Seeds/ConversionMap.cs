@@ -26,5 +26,22 @@ namespace Day5
             }
             return seed;
         }
+
+        public List<(long, long)> MapRange((long,long) range)
+        {
+            List<(long,long)> returnVal = new List<(long, long)> ();
+            bool hasMapped = false;
+            foreach (Map map in maps)
+            {
+                if (map.CanMapRange(range))
+                {
+                    returnVal = map.MapRange(range);
+                    hasMapped = true;
+                }
+            }
+            if (!hasMapped)
+                returnVal.Add(range);
+            return returnVal;
+        }
     }
 }
