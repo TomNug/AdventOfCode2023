@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 2 - Cube Game", "Day 2 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 3 - Gears", "Day 3 - Gears\Day 3 - Gears.csproj", "{FE1A38B6-1CB1-4EB7-B8D0-2881170B6231}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 4 - Scratch Cards", "Day 4 - Scratch Cards\Day 4 - Scratch Cards.csproj", "{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 4 - Scratch Cards", "Day 4 - Scratch Cards\Day 4 - Scratch Cards.csproj", "{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 5 - Seed Maps", "Day 5 - Seed Maps\Day 5 - Seed Maps.csproj", "{DAAF1F58-C983-4D84-908C-DB0E4043CF1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,14 @@ Global
 		{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}.Release|x86.ActiveCfg = Release|Any CPU
 		{15116FA7-F22A-4A1B-8BB1-2EDDF7F34A13}.Release|x86.Build.0 = Release|Any CPU
+		{DAAF1F58-C983-4D84-908C-DB0E4043CF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAAF1F58-C983-4D84-908C-DB0E4043CF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAAF1F58-C983-4D84-908C-DB0E4043CF1E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DAAF1F58-C983-4D84-908C-DB0E4043CF1E}.Debug|x86.Build.0 = Debug|Any CPU
+		{DAAF1F58-C983-4D84-908C-DB0E4043CF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAAF1F58-C983-4D84-908C-DB0E4043CF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAAF1F58-C983-4D84-908C-DB0E4043CF1E}.Release|x86.ActiveCfg = Release|Any CPU
+		{DAAF1F58-C983-4D84-908C-DB0E4043CF1E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
