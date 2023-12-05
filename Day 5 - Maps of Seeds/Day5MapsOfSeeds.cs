@@ -5,12 +5,22 @@ namespace Day5
 {
     public class Day5MapsOfSeeds
     {
-        private static List<List<Map>> allMaps = new List<List<Map>>();
-
+        private static List<ConversionMap> conversions = new List<ConversionMap>();
+        private static List<int> seeds = new List<int>();
+        public static void ProcessSeeds()
+        {
+            // for each step in the conversions
+            foreach (ConversionMap conversion in conversions)
+            {
+                // Process each seed
+                for (int seed = 0; seed < seeds.Count; seed++)
+                {
+                    seeds[seed] = conversion.Map(seeds[seed]);
+                }
+            }
+        }
         public static void ParseMaps(string[] input)
         {
-            
-            List<int> seeds = new List<int>();
             string patternSeeds = @"seeds:( (\d+))+";
             Match matchSeeds = Regex.Match(input[0], patternSeeds);
             if (matchSeeds.Success)
@@ -28,9 +38,10 @@ namespace Day5
                 Match matchName = Regex.Match(instruction, patternName);
                 Match matchMap = Regex.Match(instruction, patternMap);
 
+                bool makeConversionMap = false;
 
                 if (matchName.Success)
-                    Console.WriteLine(matchName.Value);// name = matchName.Value;
+                    name = matchName.Groups[1].Value;
                 else if (matchMap.Success)
                 {
                     Map map = new Map(int.Parse(matchMap.Groups[1].Value),
@@ -39,15 +50,15 @@ namespace Day5
                     maps.Add(map);
                 }
                 else
-                {
-                    // Found a blank, reset for new map
-                    allMaps.Add(maps);
-                    maps = new List<Map>();
-
-                }
-                // End of file
+                    makeConversionMap = true;
                 if (i + 1 == input.Length)
-                    allMaps.Add(maps);
+                    makeConversionMap = true;
+                if (makeConversionMap)
+                {
+                    ConversionMap newConversionMap = new ConversionMap(maps, name);
+                    conversions.Add(newConversionMap);
+                    maps = new List<Map>();
+                }
             }
             int x = 5;
         }
@@ -56,8 +67,8 @@ namespace Day5
             //List<ScratchCard> cards = new List<ScratchCard>();
             Console.WriteLine("\n%%% Part 1 %%%");
             ParseMaps(instructions);
-            int sumPoints = 0;
-            Console.WriteLine(String.Format("The total points from the scratch cards is {0}", sumPoints));
+            ProcessSeeds();
+            Console.WriteLine(String.Format("The lowest location is {0}", seeds.Min()));
         }
 
         public static void Part2Solution(string[] instructions)

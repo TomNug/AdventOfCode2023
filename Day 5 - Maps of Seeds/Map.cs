@@ -27,5 +27,12 @@ namespace Day5
                 return destinationRangeStart + (val - sourceRangeStart);
             return val;
         }
+
+        public bool CanMap(int val)
+        {
+            if (val >= sourceRangeStart && val <= sourceRangeEnd)
+                return true;
+            return false;
+        }
     }
 }
