@@ -6,7 +6,7 @@ namespace Day5
     public class Day5MapsOfSeeds
     {
         private static List<ConversionMap> conversions = new List<ConversionMap>();
-        private static List<int> seeds = new List<int>();
+        private static List<long> seeds = new List<long>();
         public static void ProcessSeeds()
         {
             // for each step in the conversions
@@ -19,12 +19,15 @@ namespace Day5
                 }
             }
         }
+
         public static void ParseMaps(string[] input)
         {
             string patternSeeds = @"seeds:( (\d+))+";
             Match matchSeeds = Regex.Match(input[0], patternSeeds);
-            if (matchSeeds.Success)
-                seeds = Day4.ScratchCard.ExtractDigits(matchSeeds.Groups[0].Value);
+            foreach (Capture capture in matchSeeds.Groups[2].Captures)
+            {
+                seeds.Add(long.Parse(capture.Value));
+            }
 
             List<Map> maps = new List<Map>();
             string name = "";
@@ -44,9 +47,9 @@ namespace Day5
                     name = matchName.Groups[1].Value;
                 else if (matchMap.Success)
                 {
-                    Map map = new Map(int.Parse(matchMap.Groups[1].Value),
-                        int.Parse(matchMap.Groups[2].Value),
-                        int.Parse(matchMap.Groups[3].Value));
+                    Map map = new Map(long.Parse(matchMap.Groups[1].Value),
+                        long.Parse(matchMap.Groups[2].Value),
+                        long.Parse(matchMap.Groups[3].Value));
                     maps.Add(map);
                 }
                 else
@@ -80,7 +83,7 @@ namespace Day5
         {
             string samplePath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Sample.txt";
             string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Full.txt";
-            string[] instructions = System.IO.File.ReadAllLines(samplePath);
+            string[] instructions = System.IO.File.ReadAllLines(fullPath);
             Part1Solution(instructions);
             Part2Solution(instructions);
         }

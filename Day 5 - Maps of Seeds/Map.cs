@@ -8,12 +8,12 @@ namespace Day5
 {
     public class Map
     {
-        private int sourceRangeStart;
-        private int sourceRangeEnd;
-        private int destinationRangeStart;
-        private int destinationRangeEnd;
+        private long sourceRangeStart;
+        private long sourceRangeEnd;
+        private long destinationRangeStart;
+        private long destinationRangeEnd;
 
-        public Map(int destinationRangeStart, int sourceRangeStart, int rangeLength)
+        public Map(long destinationRangeStart, long sourceRangeStart, long rangeLength)
         {
             this.sourceRangeStart = sourceRangeStart;
             this.sourceRangeEnd = sourceRangeStart + rangeLength - 1;
@@ -21,14 +21,14 @@ namespace Day5
             this.destinationRangeEnd = destinationRangeStart + rangeLength - 1;
         }
 
-        public int MapValue(int val)
+        public long MapValue(long val)
         {
             if (val >= sourceRangeStart && val <= sourceRangeEnd)
                 return destinationRangeStart + (val - sourceRangeStart);
             return val;
         }
 
-        public bool CanMap(int val)
+        public bool CanMap(long val)
         {
             if (val >= sourceRangeStart && val <= sourceRangeEnd)
                 return true;

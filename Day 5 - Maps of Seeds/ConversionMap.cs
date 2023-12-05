@@ -15,7 +15,7 @@ namespace Day5
             this.maps = maps;
             this.name = name;
         }
-        public int Map(int seed)
+        public long Map(long seed)
         {
             foreach(Map map in maps)
             {
