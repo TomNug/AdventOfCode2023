@@ -6,8 +6,29 @@ namespace Day5
     public class Day5MapsOfSeeds
     {
         private static List<ConversionMap> conversions = new List<ConversionMap>();
-        private static HashSet<long> seeds = new HashSet<long>();
+        // Used in part 1
+        private static List<long> seeds = new List<long>();
+
+        // Used in part 2
+        private static HashSet<long> seedsHashSet = new HashSet<long>();
         private static List<(long, long)> seedsFromTo = new List<(long, long)> ();
+
+
+        public static void ProcessSeedsForPart1()
+        {
+            // for each step in the conversions
+            foreach (ConversionMap conversion in conversions)
+            {
+                // Process each seed
+                for (int seed = 0; seed < seeds.Count; seed++)
+                {
+                    seeds[seed] = conversion.Map(seeds[seed]);
+                }
+            }
+        }
+        
+        
+        
         public static void ProcessSeeds()
         {
             // Treat seeds one at a time.
@@ -41,6 +62,7 @@ namespace Day5
             List<long> seedRanges = new List<long>();
             foreach (Capture capture in matchSeeds.Groups[2].Captures)
             {
+                seeds.Add(long.Parse(capture.Value));
                 seedRanges.Add(long.Parse(capture.Value));
             }
             for (int seedRange = 0; seedRange < seedRanges.Count; seedRange+=2)
@@ -91,7 +113,7 @@ namespace Day5
             //List<ScratchCard> cards = new List<ScratchCard>();
             Console.WriteLine("\n%%% Part 1 %%%");
             ParseMaps(instructions);
-            ProcessSeeds();
+            ProcessSeedsForPart1();
             Console.WriteLine(String.Format("The lowest location is {0}", seeds.Min()));
         }
 
