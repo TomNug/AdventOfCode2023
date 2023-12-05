@@ -8,4 +8,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Day 4 - Scratch Cards\Day 4 - Scratch Cards.csproj" />
+  </ItemGroup>
+
 </Project>
