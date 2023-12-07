@@ -16,3 +16,6 @@ More **test-driven development** helped with the process. Made progress in secur
 
 ## Day 5 - Parsing strings to identify sets of numbers which define arithmetic functions applied to specific ranges of numbers. Processing numbers through these functions.
 **Testing** is such a stress relief. Instead of processing each number in a large range, can instead work with the limits of the range instead. More practice with **regex**.
+
+## Day 6 - Using the quadratic equation to spare brute force
+**Unit tests** narrowed the problem when debugged, making development easier. More regex.
