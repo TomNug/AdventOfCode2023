@@ -26,10 +26,17 @@ namespace Day5
             }
         }
         
-        
+        public static void Reset()
+        {
+            seedsFromTo = new List<(long, long)>();
+            conversions = new List<ConversionMap>();
+        }
         
         public static long ProcessSeedsForPart2()
         {
+            // The end result of each seed
+            List<(long, long)> finalRanges = new List<(long, long)>();
+
             // To store the end result ranges from mapping 
             List<(long, long)> processedRanges = new List<(long, long)>();
 
@@ -54,7 +61,7 @@ namespace Day5
                     startOfPassRanges = new List<(long,long)>(endOfPassRanges);
                     endOfPassRanges.Clear();
                 }
-                processedRanges = new List<(long, long)>(startOfPassRanges);
+                processedRanges.AddRange(startOfPassRanges);
 
             }
 

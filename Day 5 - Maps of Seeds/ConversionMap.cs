@@ -29,19 +29,26 @@ namespace Day5
 
         public List<(long, long)> MapRange((long,long) range)
         {
-            List<(long,long)> returnVal = new List<(long, long)> ();
+            // Unmapped numbers
+            // Either at the start and haven't been mapped yet
+            // Or have been left behind on a pass through a map
+            List<(long, long)> unmapped = new List<(long, long)>();
+
+            // These are numbers which a map has taken and transformed
+            List<(long,long)> mapped = new List<(long, long)> ();
+
             bool hasMapped = false;
             foreach (Map map in maps)
             {
                 if (map.CanMapRange(range))
                 {
-                    returnVal = map.MapRange(range);
+                    //(List<(long,long)>, List<(long, long)>) mappedUnmapped = new map.MapRange(range);
+                    //mapped.AddRange(mappedUnmapped.Item1);
+                    //unmapped.AddRange(mappedUnmapped.Item2);
                     hasMapped = true;
                 }
             }
-            if (!hasMapped)
-                returnVal.Add(range);
-            return returnVal;
+            return unmapped; // TEMP PLEASE DO CHANGE
         }
     }
 }
