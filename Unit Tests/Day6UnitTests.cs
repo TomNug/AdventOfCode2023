@@ -31,5 +31,35 @@ namespace Unit_Tests
             //Assert
             resultRaces.Should().BeEquivalentTo(expected);
         }
+
+        public static IEnumerable<object[]> Day6_Race_CalculateNumberOfWinners_Data()
+        {
+            yield return new object[]
+            {
+                new Race(7,9), 4
+            };
+            yield return new object[]
+            {
+                new Race(15,40), 8
+            };
+            yield return new object[]
+            {
+                new Race(30,200), 9
+            };
+        }
+        [Theory]
+        [MemberData(nameof(Day6_Race_CalculateNumberOfWinners_Data))]
+        public void Day6_Race_CalculateNumberOfWinners(Race testRace,
+            int expected)
+        {
+            //Arrange
+
+            //Act
+            var result = testRace.CalculateNumberOfWinners();
+            //Assert
+            result.Should().Be(expected);
+        }
+
+
     }
 }
