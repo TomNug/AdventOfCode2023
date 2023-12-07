@@ -10,17 +10,26 @@ namespace Unit_Tests
 {
     public class Day6UnitTests
     {
-        [Theory]
-        [InlineData(1, 1)]
-        [InlineData(1, 1)]
-        public void Day6_Test(int input, int expected)
+        public static IEnumerable<object[]> Day6_Day6_ParseRaces_ReturnsRaces_Data()
         {
-            // Arrange
+            yield return new object[]
+            {
+                new string[] {"Time:      7  15   30",
+                "Distance:  9  40  200" },
+                new List<Race> {new Race(7,9), new Race(15,40), new Race(30,200) }
+            };
+        }
+        [Theory]
+        [MemberData(nameof(Day6_Day6_ParseRaces_ReturnsRaces_Data))]
+        public void Day6_Day6_ParseRaces_ReturnsRaces(string[] instructions, 
+            List<Race> expected)
+        {
+            //Arrange
 
-            // Act
-
-            // Assert
-            input.Should().Be(expected);
+            //Act
+            List<Race> resultRaces = Day6.Day6.ParseRaces(instructions);
+            //Assert
+            resultRaces.Should().BeEquivalentTo(expected);
         }
     }
 }
