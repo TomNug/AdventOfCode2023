@@ -26,7 +26,7 @@ namespace Day4
             CalcNumMatches();
         }
 
-        static List<int> ExtractDigits(string input)
+        public static List<int> ExtractDigits(string input)
         {
             string digitPattern = @"(\d{1,2})";
             MatchCollection matches = Regex.Matches(input, digitPattern);
