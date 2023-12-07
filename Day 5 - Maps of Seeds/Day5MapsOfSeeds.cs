@@ -148,10 +148,9 @@ namespace Day5
         }
         public static void Main(string[] args)
         {
-            string samplePath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Sample.txt";
-            string simplerPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Simpler.txt";
-            string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Full.txt";
-            string[] instructions = System.IO.File.ReadAllLines(fullPath);
+            string samplePath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 6 - Toy Races\Sample.txt";
+            string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 6 - Toy Races\Full.txt";
+            string[] instructions = System.IO.File.ReadAllLines(samplePath);
             Part1Solution(instructions);
             Part2Solution(instructions);
         }
