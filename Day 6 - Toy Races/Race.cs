@@ -9,8 +9,8 @@ namespace Day6
     public class Race
     {
         public int time { get; set; }
-        public int distance { get; set; }
-        public Race(int time, int distance)
+        public long distance { get; set; }
+        public Race(int time, long distance)
         {
             this.time = time;
             this.distance = distance;
@@ -34,7 +34,7 @@ namespace Day6
         {
             int a = -1;
             int b = time;
-            int c = -distance;
+            long c = -distance;
             double x1 = (-b + Math.Sqrt(Math.Pow(b, 2) - 4 * a * c)) / (2 * a);
             double x2 = (-b - Math.Sqrt(Math.Pow(b, 2) - 4 * a * c)) / (2 * a);
 
