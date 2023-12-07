@@ -194,5 +194,69 @@ namespace Unit_Tests
         }
 
 
+
+
+        public static IEnumerable<object[]> Day5_ConversionMap_MapRange_Data()
+        {
+            yield return new object[]
+            {
+                new List<(long,long,long)> // Maps to create for the conversionMap
+                {
+                    (0L,10L,11L), // 10-20
+                    (70L,50L,21L) // 50-70
+                },
+                new List<(long,long)> // Starting input ranges to put through the conversionMap
+                {
+                    (0,100)
+                },
+                new List<(long,long)> // Expected ranges to be returned
+                {
+                    (0L,9L),
+                    (0L,10L),
+                    (21L,49L),
+                    (70L,90L),
+                    (71L,100)
+                }
+            };
+        }
+        [Theory]
+        [MemberData(nameof(Day5_ConversionMap_MapRange_Data))]
+        public void Day5_ConversionMap_MapRange(List<(long,long,long)> mapsInput, List<(long,long)> inputRanges,
+            List<(long, long)> expectedRanges)
+        {
+            // Arrange
+
+            // List of maps 
+            List<Map> maps = new List<Map>();
+            foreach((long to, long from, long range) in mapsInput)
+            {
+                maps.Add(new Map(to, from, range));
+            }
+            // Conversion Map to gather the maps together to represent a layer
+            ConversionMap testingConversionMap = new ConversionMap(maps, "testing");
+
+            List<(long, long)> resultRanges = new List<(long, long)>();
+
+            // Act
+            foreach((long, long) range in inputRanges)
+            {
+                resultRanges.AddRange(testingConversionMap.MapRange(range));
+            }
+
+            // Assert
+            resultRanges.Count.Should().Be(expectedRanges.Count);
+            resultRanges.Should().BeEquivalentTo(expectedRanges);
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 }
