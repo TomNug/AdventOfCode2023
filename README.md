@@ -13,3 +13,6 @@ Further practise with **regex**. Using **xUnit** to implement tests for Day 1. U
 
 ## Day 4 - Parsing strings to identify sets of numbers and performing calculations based on the intersections
 More **test-driven development** helped with the process. Made progress in secure increments and was confident in my code. More complex **regex** patterns, so more good practise. Using **sets** and **intersections** to find crossover between numbers.
+
+## Day 5 - Parsing strings to identify sets of numbers which define arithmetic functions applied to specific ranges of numbers. Processing numbers through these functions.
+**Testing** is such a stress relief. Instead of processing each number in a large range, can instead work with the limits of the range instead. More practice with **regex**.
