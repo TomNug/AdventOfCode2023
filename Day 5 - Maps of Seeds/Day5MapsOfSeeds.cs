@@ -26,6 +26,7 @@ namespace Day5
             }
         }
         
+        // Used in testing to reset the static values
         public static void Reset()
         {
             seedsFromTo = new List<(long, long)>();
@@ -76,18 +77,7 @@ namespace Day5
             
         }
 
-        public static long FindLowestForPart2()
-        {
-            long lowest = long.MaxValue;
-            foreach(KeyValuePair<long, long> pair in megaMap)
-            {
-                if (pair.Value < lowest)
-                {
-                    lowest = pair.Value;
-                }
-            }
-            return lowest;
-        }
+        // Reads the input and creates the maps
         public static void ParseMaps(string[] input)
         {
             string patternSeeds = @"seeds:( (\d+))+";
@@ -144,7 +134,6 @@ namespace Day5
         }
         public static void Part1Solution(string[] instructions)
         {
-            //List<ScratchCard> cards = new List<ScratchCard>();
             Console.WriteLine("\n%%% Part 1 %%%");
             ParseMaps(instructions);
             ProcessSeedsForPart1();
@@ -162,7 +151,7 @@ namespace Day5
             string samplePath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Sample.txt";
             string simplerPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Simpler.txt";
             string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 5 - Maps of Seeds\Full.txt";
-            string[] instructions = System.IO.File.ReadAllLines(samplePath);
+            string[] instructions = System.IO.File.ReadAllLines(fullPath);
             Part1Solution(instructions);
             Part2Solution(instructions);
         }

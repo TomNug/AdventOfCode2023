@@ -59,7 +59,7 @@ namespace Day5
             if (inputHigh > sourceRangeEnd)
             {
                 // A portion of input range is above the range
-                unmappedNumbers.Add(((Math.Max(sourceRangeEnd + 1, inputLow), inputHigh)));
+                unmappedNumbers.Add(((Math.Min(sourceRangeEnd + 1, inputHigh), inputHigh)));
             }
             return ((mappedNumbers, unmappedNumbers));
         }
