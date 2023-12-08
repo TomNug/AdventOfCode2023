@@ -10,6 +10,8 @@ namespace Day7
     {
         public string cards { get; set; }
         public int bid { get; set; }
+        public int handRank { get; set; }
+        public int numJokers { get; set; }
         public Dictionary<char, int> cardFrequencies { get; set; }
         public Hand(string cards, int bid)
         {
@@ -17,6 +19,7 @@ namespace Day7
             this.bid = bid;
             cardFrequencies = new Dictionary<char, int>();
             CountCards();
+            handRank = DetermineHand();
         }
 
         // Dictionary to store the values of each hand
@@ -37,7 +40,7 @@ namespace Day7
             { 'A', 13 },
             { 'K', 12 },
             { 'Q', 11 },
-            { 'J', 10 },
+            //{ 'J', 10 },
             { 'T', 9 },
             { '9', 8 },
             { '8', 7 },
@@ -48,6 +51,7 @@ namespace Day7
             { '3', 2 },
             { '2', 1 },
             { '1', 0 },
+            { 'J', -1 },
         };
 
         // Reads the string representing the hard
@@ -56,7 +60,10 @@ namespace Day7
         {
             foreach(char c in cards)
             {
-                if (cardFrequencies.ContainsKey(c))
+                // Don't add jokers to the hand
+                if (c == 'J')
+                    numJokers++;
+                else if (cardFrequencies.ContainsKey(c))
                     cardFrequencies[c]++;
                 else
                     cardFrequencies.Add(c, 1);
@@ -64,11 +71,9 @@ namespace Day7
         }
         public int CompareTo(Hand? other)
         {
-            int thisScore = DetermineHand();
-            int otherScore = other.DetermineHand();
-            if (thisScore > otherScore)
+            if (handRank > other.handRank)
                 return 1;
-            else if (thisScore < otherScore)
+            else if (handRank < other.handRank)
                 return -1;
             else
             {
@@ -108,24 +113,27 @@ namespace Day7
             foreach(KeyValuePair<char, int> c in cardFrequencies)
             {
                 frequencyInts.Add(c.Value);
-            }    
+            }
 
             frequencyInts.Sort((a, b) => b.CompareTo(a));
-
-            if (frequencyInts[0] == 5)
+            if (numJokers == 5) // All jokers, make a FIVE
                 return handStrength["Five of a kind"];
-            if (frequencyInts[0] == 4)
+            else if ((frequencyInts[0] + numJokers) == 5) // Most common + jokers makes FIVE
+                return handStrength["Five of a kind"];
+            else if ((frequencyInts[0] + numJokers) == 4) // Most common + jokers makes FOUR
                 return handStrength["Four of a kind"];
-            if (frequencyInts[0] == 3 && frequencyInts[1] == 2)
+            else if ((frequencyInts[0] + frequencyInts[1] + numJokers) == 5) // Two most common + jokers makes five => FULL HOUSE
                 return handStrength["Full house"];
-            if (frequencyInts[0] == 3)
+            else if (frequencyInts[0] + numJokers == 3) // Most common + jokers makes THREE
                 return handStrength["Three of a kind"];
-            if (frequencyInts[0] == 2 && frequencyInts[1] == 2)
+            else if (frequencyInts[0] == 2 && frequencyInts[1] == 2) // Joker should be used to make THREE instead
                 return handStrength["Two pair"];
-            if (frequencyInts[0] == 2)
+            else if (frequencyInts[0] + numJokers == 2) // No pairs, + jokers makes TWO
                 return handStrength["One pair"];
-            else
+            else // No pairs, no jokers
                 return handStrength["High card"];
         }
     }
 }
+// Jokers make a full house
+// Otherwise jokers make a 3 of a kind
