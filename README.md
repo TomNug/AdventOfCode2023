@@ -1,5 +1,5 @@
 # AdventOfCode2023
-My repository for my solutions for 2023's Advent of Code (https://adventofcode.com/). It is an advent calendar of programming problems. 
+My repository for my solutions for 2023's Advent of Code (https://adventofcode.com/). It is an advent calendar of programming problems. Problem descriptions have been copied into READMEs for convenience. They are not mind and belong to Advent of Code.
 
 # What I have learned
 ## Day 1 - Parsing strings for values of numeric words and characters
@@ -19,3 +19,6 @@ More **test-driven development** helped with the process. Made progress in secur
 
 ## Day 6 - Using the quadratic equation to spare brute force
 **Unit tests** narrowed the problem when debugged, making development easier. More regex.
+
+## Day 7 - Parsing card hands and ranking them
+**Test-driven development** making development calmer, and easier to debug. More **regex**. Implementing **IComparable** with custom **CompareTo**.
