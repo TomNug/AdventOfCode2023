@@ -9,10 +9,12 @@ namespace Day7
     public class Hand: IComparable<Hand>
     {
         public string cards { get; set; }
+        public int bid { get; set; }
         public Dictionary<char, int> cardFrequencies { get; set; }
-        public Hand(string cards)
+        public Hand(string cards, int bid)
         {
             this.cards = cards;
+            this.bid = bid;
             cardFrequencies = new Dictionary<char, int>();
             CountCards();
         }

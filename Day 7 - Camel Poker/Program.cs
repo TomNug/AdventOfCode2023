@@ -5,10 +5,30 @@ namespace Day7
 {
     public class Program
     {
-        
+        public static List<Hand> ParseHands(string[] instructions)
+        {
+            List<Hand> hands = new List<Hand>();
+            foreach(string instruction in instructions)
+            {
+                string pattern = @"([AKQJT987654321]+) (\d+)";
+                Match match = Regex.Match(instruction, pattern);
+                string cards = match.Groups[1].Value;
+                int bid = Convert.ToInt32(match.Groups[2].Value);
+                Hand hand = new Hand(cards, bid);
+                hands.Add(hand);
+            }
+            return hands;
+        }
         public static void Part1Solution(string[] instructions)
         {
             Console.WriteLine("\n%%% Part 1 %%%");
+            List<Hand> hands = ParseHands(instructions);
+            foreach(Hand hand in hands)
+                Console.WriteLine(String.Format("{0} {1}",hand.cards, hand.bid));
+            hands.Sort();
+            Console.WriteLine("Sorted");
+            foreach (Hand hand in hands)
+                Console.WriteLine(String.Format("{0} {1}", hand.cards, hand.bid));
 
             Console.WriteLine(String.Format("The total winnings are {0}", 5));
         }
