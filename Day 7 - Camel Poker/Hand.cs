@@ -18,7 +18,7 @@ namespace Day7
         }
 
         // Dictionary to store the values of each hand
-        private static readonly Dictionary<string, int> handValues = new Dictionary<string, int>
+        public static readonly Dictionary<string, int> handValues = new Dictionary<string, int>
         {
             { "Five of a kind", 6 },
             { "Four of a kind", 5 },
@@ -49,13 +49,29 @@ namespace Day7
         // Returns the number repesenting the value of the hand
         public int DetermineHand()
         {
-            int highestFrequency = 0;
+            List<int> frequencyInts = new List<int>();
 
-            foreach(char c in cards)
+            foreach(KeyValuePair<char, int> c in cardFrequencies)
             {
+                frequencyInts.Add(c.Value);
+            }    
 
-            }
-            return 5;
+            frequencyInts.Sort((a, b) => b.CompareTo(a));
+
+            if (frequencyInts[0] == 5)
+                return handValues["Five of a kind"];
+            if (frequencyInts[0] == 4)
+                return handValues["Four of a kind"];
+            if (frequencyInts[0] == 3 && frequencyInts[1] == 2)
+                return handValues["Full house"];
+            if (frequencyInts[0] == 3)
+                return handValues["Three of a kind"];
+            if (frequencyInts[0] == 2 && frequencyInts[1] == 2)
+                return handValues["Two pair"];
+            if (frequencyInts[0] == 2)
+                return handValues["One pair"];
+            else
+                return handValues["High card"];
         }
     }
 }
