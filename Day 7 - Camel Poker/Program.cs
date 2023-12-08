@@ -23,14 +23,16 @@ namespace Day7
         {
             Console.WriteLine("\n%%% Part 1 %%%");
             List<Hand> hands = ParseHands(instructions);
-            foreach(Hand hand in hands)
-                Console.WriteLine(String.Format("{0} {1}",hand.cards, hand.bid));
-            hands.Sort();
-            Console.WriteLine("Sorted");
-            foreach (Hand hand in hands)
-                Console.WriteLine(String.Format("{0} {1}", hand.cards, hand.bid));
 
-            Console.WriteLine(String.Format("The total winnings are {0}", 5));
+            // Sort the hands by their value
+            hands.Sort();
+
+            // Maintain sum of (bid * rank)
+            int sumOfWinnings = 0;
+            for (int rank = 0; rank < hands.Count; rank++)
+                sumOfWinnings += hands[rank].bid * (rank + 1);
+
+            Console.WriteLine(String.Format("The total winnings are {0}", sumOfWinnings));
         }
 
         public static void Part2Solution(string[] instructions)
@@ -44,7 +46,7 @@ namespace Day7
 
             string samplePath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 7 - Camel Poker\Sample.txt";
             string fullPath = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\Day 7 - Camel Poker\Full.txt";
-            string[] instructions = System.IO.File.ReadAllLines(samplePath);
+            string[] instructions = System.IO.File.ReadAllLines(fullPath);
             Part1Solution(instructions);
             Part2Solution(instructions);
         }
