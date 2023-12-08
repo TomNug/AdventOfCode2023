@@ -28,7 +28,7 @@ namespace Day7
             hands.Sort();
 
             // Maintain sum of (bid * rank)
-            int sumOfWinnings = 0;
+            long sumOfWinnings = 0;
             for (int rank = 0; rank < hands.Count; rank++)
                 sumOfWinnings += hands[rank].bid * (rank + 1);
 

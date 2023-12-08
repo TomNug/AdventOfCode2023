@@ -26,7 +26,7 @@ namespace Unit_Tests
             //Arrange
 
             //Act
-            var hand = new Day7.Hand(handString);
+            var hand = new Day7.Hand(handString, 5);
             var resultDictionary = hand.cardFrequencies;
             //Assert
             resultDictionary.Should().BeEquivalentTo(expected);
@@ -72,6 +72,77 @@ namespace Unit_Tests
                 "12345",
                 Day7.Hand.handStrength["High card"]
             };
+            // Tests to check Jokers behave as expected
+            
+            // All jokers
+            yield return new object[]
+            {
+                "JJJJJ",
+                Day7.Hand.handStrength["Five of a kind"]
+            };
+
+            // Four jokers
+            yield return new object[]
+            {
+                "1JJJJ",
+                Day7.Hand.handStrength["Five of a kind"]
+            };
+
+            // Three jokers
+            yield return new object[]
+            {
+                "12JJJ",
+                Day7.Hand.handStrength["Four of a kind"]
+            };
+            yield return new object[]
+            {
+                "22JJJ",
+                Day7.Hand.handStrength["Five of a kind"]
+            };
+
+            // Two Jokers
+            yield return new object[]
+            {
+                "123JJ",
+                Day7.Hand.handStrength["Three of a kind"]
+            };
+            yield return new object[]
+            {
+                "112JJ",
+                Day7.Hand.handStrength["Four of a kind"]
+            };
+            yield return new object[]
+            {
+                "111JJ",
+                Day7.Hand.handStrength["Five of a kind"]
+            };
+
+            // One joker
+            yield return new object[]
+            {
+                "1234J",
+                Day7.Hand.handStrength["One pair"]
+            };
+            yield return new object[]
+            {
+                "1123J",
+                Day7.Hand.handStrength["Three of a kind"]
+            };
+            yield return new object[]
+            {
+                "1122J",
+                Day7.Hand.handStrength["Full house"]
+            };
+            yield return new object[]
+            {
+                "1112J",
+                Day7.Hand.handStrength["Four of a kind"]
+            };
+            yield return new object[]
+            {
+                "1111J",
+                Day7.Hand.handStrength["Five of a kind"]
+            };
         }
         [Theory]
         [MemberData(nameof(Day7_Hand_DetermineHand_Data))]
@@ -81,7 +152,7 @@ namespace Unit_Tests
             //Arrange
 
             //Act
-            var hand = new Day7.Hand(handString);
+            var hand = new Day7.Hand(handString, 5);
             var resultScore = hand.DetermineHand();
             //Assert
             resultScore.Should().Be(expectedScore);
@@ -114,6 +185,18 @@ namespace Unit_Tests
                 "12346", // Wins on tie
                 false
             };
+            yield return new object[]
+            {
+                "11JJJ",
+                "11111", // Wins on tie
+                false
+            };
+            yield return new object[]
+            {
+                "11111",// Wins on tie
+                "111JJ", 
+                false
+            };
         }
         [Theory]
         [MemberData(nameof(Day7_Hand_CompareTo_Data))]
@@ -123,8 +206,8 @@ namespace Unit_Tests
             //Arrange
 
             //Act
-            var hand1 = new Day7.Hand(handString1);
-            var hand2 = new Day7.Hand(handString2);
+            var hand1 = new Day7.Hand(handString1, 5);
+            var hand2 = new Day7.Hand(handString2, 5);
             bool comparison = hand1 > hand2;
 
             var result = (comparison == expected);
