@@ -32,6 +32,7 @@
     <ProjectReference Include="..\Day 5 - Maps of Seeds\Day 5 - Maps of Seeds.csproj" />
     <ProjectReference Include="..\Day 6 - Toy Races\Day 6 - Toy Races.csproj" />
     <ProjectReference Include="..\Day 7 - Camel Poker\Day 7 - Camel Poker.csproj" />
+    <ProjectReference Include="..\Day 8 - Haunted Wasteland\Day 8 - Haunted Wasteland.csproj" />
   </ItemGroup>
 
 </Project>
