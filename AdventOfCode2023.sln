@@ -27,9 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 6 - Toy Races", "Day 6 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 7 - Camel Poker", "Day 7 - Camel Poker\Day 7 - Camel Poker.csproj", "{06B7D3EE-24AD-463B-B547-DFBED99FE70F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 8 - Haunted Wasteland", "Day 8 - Haunted Wasteland\Day 8 - Haunted Wasteland.csproj", "{9650517E-7A01-4C63-9958-08DE9222C137}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 8 - Haunted Wasteland", "Day 8 - Haunted Wasteland\Day 8 - Haunted Wasteland.csproj", "{9650517E-7A01-4C63-9958-08DE9222C137}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day9 - Oasis Report", "Day9 - Oasis Report\Day9 - Oasis Report.csproj", "{1464B58C-3AB6-4992-A415-990C3FBBA27F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 9 - Oasis Report", "Day9 - Oasis Report\Day 9 - Oasis Report.csproj", "{1464B58C-3AB6-4992-A415-990C3FBBA27F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,7 +119,7 @@ Global
 		{9650517E-7A01-4C63-9958-08DE9222C137}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9650517E-7A01-4C63-9958-08DE9222C137}.Release|x86.ActiveCfg = Release|Any CPU
 		{9650517E-7A01-4C63-9958-08DE9222C137}.Release|x86.Build.0 = Release|Any CPU
-    {1464B58C-3AB6-4992-A415-990C3FBBA27F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1464B58C-3AB6-4992-A415-990C3FBBA27F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1464B58C-3AB6-4992-A415-990C3FBBA27F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1464B58C-3AB6-4992-A415-990C3FBBA27F}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{1464B58C-3AB6-4992-A415-990C3FBBA27F}.Debug|x86.Build.0 = Debug|Any CPU
