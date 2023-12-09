@@ -26,3 +26,5 @@ More **test-driven development** helped with the process. Made progress in secur
 ## Day 8 - Parsing series of crossroads with left and right turn options that lead to further crossroads, finding steps from start point to destination
 **Regex**, **Dictionaries**, **Prime factorization**, **Lowest Common Multiples**. If the only option is a bruteforce which is taking too long, assumptions need updating.
 
+## Day - Extrapolating sequences to identify subsequent and preceeding numbers
+**Regex**, **stacks**.
