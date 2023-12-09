@@ -13,16 +13,25 @@ namespace Day9
             return true;
         }
 
-        public static int CalculateModifierFromStack(Stack<int> stack)
+        public static int CalculateModifierFromStack(Stack<int> stack, bool findingNumberOnEnd)
         {
             int num = stack.Pop();
+            if (findingNumberOnEnd)
+            {
+                while (stack.Count > 0)
+                    num += stack.Pop();
 
-            while(stack.Count > 0)
-                num += stack.Pop();
-
-            return num;
+                return num;
+            }
+            else
+            {
+                while (stack.Count > 0)
+                    num = stack.Pop() - num;
+                return -num;
+            }
         }
-        public static int Extrapolate(string line)
+
+        public static List<int> ReadSequence(string line)
         {
             string pattern = @"(?: ?(-?\d+))+";
             Match match = Regex.Match(line, pattern);
@@ -31,24 +40,41 @@ namespace Day9
             {
                 sequence.Add(int.Parse(c.Value));
             }
+            return sequence;
+        }
 
-            int lastElementInSequence = sequence[sequence.Count - 1];
-
+        public static Stack<int> GenerateStack(List<int> sequence, bool findingNumberOnEnd)
+        {
             Stack<int> endNumbersStack = new Stack<int>();
-
             while (!AllZeroes(sequence))
             {
                 List<int> differences = new List<int>();
-                for(int i = 1; i < sequence.Count; i++)
+                for (int i = 1; i < sequence.Count; i++)
                 {
                     differences.Add(sequence[i] - sequence[i - 1]);
                 }
-                endNumbersStack.Push(differences[differences.Count - 1]);
+                if (findingNumberOnEnd)
+                    endNumbersStack.Push(differences[differences.Count - 1]);
+                else
+                    endNumbersStack.Push(differences[0]);
                 sequence = differences;
             }
+            return endNumbersStack;
+        }
+        public static int Extrapolate(string line, bool findingNumberOnEnd = true)
+        {
+            List<int> sequence = ReadSequence(line);
 
-            lastElementInSequence += CalculateModifierFromStack(endNumbersStack);
-            return lastElementInSequence;
+            int elementToExtrapolateFrom;
+            if (findingNumberOnEnd)
+                elementToExtrapolateFrom = sequence[sequence.Count - 1];
+            else
+                elementToExtrapolateFrom = sequence[0];
+
+            Stack<int> endNumbersStack = GenerateStack(sequence, findingNumberOnEnd);
+
+            elementToExtrapolateFrom += CalculateModifierFromStack(endNumbersStack, findingNumberOnEnd);
+            return elementToExtrapolateFrom;
         }
         public static void Part1Solution(string[] instructions)
         {
@@ -64,9 +90,13 @@ namespace Day9
         public static void Part2Solution(string[] instructions)
         {
             Console.WriteLine("\n%%% Part 2 %%%");
+            int sumExtrapolated = 0;
+            foreach (string line in instructions)
+            {
+                sumExtrapolated += Extrapolate(line, false);
+            }
 
-
-            Console.WriteLine(String.Format("You get to ZZZ in {0} steps", 5));
+            Console.WriteLine(String.Format("The sum of all extrapolated numbers is {0}", sumExtrapolated));
         }
         public static void Main(string[] args)
         {
@@ -80,7 +110,7 @@ namespace Day9
             //string[] instructionsSample2 = System.IO.File.ReadAllLines(samplePath);
              string[] instructionsFull = System.IO.File.ReadAllLines(fullPath);
             Part1Solution(instructionsFull);
-            Part2Solution(instructionsSample);
+            Part2Solution(instructionsFull);
         }
     }
 }
