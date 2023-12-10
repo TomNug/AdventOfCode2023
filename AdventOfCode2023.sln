@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 7 - Camel Poker", "Day 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 8 - Haunted Wasteland", "Day 8 - Haunted Wasteland\Day 8 - Haunted Wasteland.csproj", "{9650517E-7A01-4C63-9958-08DE9222C137}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 9 - Oasis Report", "Day9 - Oasis Report\Day 9 - Oasis Report.csproj", "{1464B58C-3AB6-4992-A415-990C3FBBA27F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 9 - Oasis Report", "Day 9 - Oasis Report\Day 9 - Oasis Report.csproj", "{1464B58C-3AB6-4992-A415-990C3FBBA27F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
