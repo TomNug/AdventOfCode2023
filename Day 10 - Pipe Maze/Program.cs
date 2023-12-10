@@ -7,10 +7,32 @@ namespace Day10
     {
         public static char[,] ParseGrid(string[] instructions)
         {
-            char[,] grid = new char[instructions.Length, instructions[0].Length];
+            int rows = instructions.Length + 2;
+            int cols = instructions[0].Length + 2;
+            char[,] grid = new char[rows, cols];
+
+            for (int row = 0; row < rows; row++)
+            {
+                // First or last row, make all '.'
+                if (row == 0 || row == rows - 1)
+                {
+                    for (int col = 0; col < cols; col++)
+                    {
+                        grid[row, col] = '.';
+                    }
+                }
+                else
+                {
+                    grid[row, 0] = '.';
+                    grid[row, cols-1] = '.';
+                }
+                
+            }
+
             for (int i = 0; i < instructions.Length; i++)
+                
                 for (int j = 0; j < instructions[0].Length; j++)
-                    grid[i, j] = (char)(instructions[i][j]);
+                    grid[i+1, j+1] = (char)(instructions[i][j]);
             return grid;
         }
         public static void Part1Solution(string[] instructions)
