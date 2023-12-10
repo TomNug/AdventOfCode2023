@@ -42,7 +42,9 @@ namespace Day10
                                             {'.', '.' , '.' , '.' , '.' }};
 
             //Act
-            ((int,int),(int,int)) result = Day10.TraversalHelper.FindAdjacentPositions(coord, grid);
+            TraversalHelper helper = new TraversalHelper();
+            helper.SetGrid(grid);
+            ((int,int),(int,int)) result = helper.FindAdjacentPositions(coord);
             List<(int, int)> resultAsList = new List<(int, int)>();
             resultAsList.Add(result.Item1);
             resultAsList.Add(result.Item2);
@@ -51,5 +53,48 @@ namespace Day10
             resultAsList.Should().BeEquivalentTo(expected);
         }
 
+
+        public static IEnumerable<object[]> Day10_TraversalHelper_NextStepThroughMaze_CorrectCoord_Data()
+        {
+            yield return new object[]
+            {
+                (1, 1), // At
+                (1,2), // Prev
+                (2,1) // Expected
+            };
+            yield return new object[]
+            {
+                (1, 3), // At
+                (1, 2), // Prev
+                (2, 3) // Expected
+            };
+            yield return new object[]
+            {
+                (2, 1), // At
+                (1, 1), // Prev
+                (3, 1) // Expected
+            };
+
+        }
+        [Theory]
+        [MemberData(nameof(Day10_TraversalHelper_NextStepThroughMaze_CorrectCoord_Data))]
+        public void Day10_TraversalHelper_NextStepThroughMaze_CorrectCoord((int, int) at, (int,int) prev, (int,int) expected)
+        {
+            //Arrange
+            char[,] grid = new char[,] {    {'.', '.' , '.' , '.' , '.' },
+                                            {'.', 'F' , '-' , '7' , '.' },
+                                            {'.', '|' , '.' , '|' , '.' },
+                                            {'.', '|' , 'F' , 'J' , '.' },
+                                            {'.', 'L' , 'J' , '.' , '.' },
+                                            {'.', '.' , '.' , '.' , '.' }};
+
+            //Act
+            TraversalHelper helper = new TraversalHelper();
+            helper.SetGrid(grid); 
+            (int, int) result = helper.NextStepThroughMaze(prev, at);
+
+            //Assert
+            result.Should().Be(expected);
+        }
     }
 }

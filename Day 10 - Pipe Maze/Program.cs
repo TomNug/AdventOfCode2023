@@ -5,8 +5,9 @@ namespace Day10
 {
     public class Program
     {
-        public static char[,] ParseGrid(string[] instructions)
+        public static (char[,],(int,int)) ParseForGridAndStart(string[] instructions)
         {
+            (int, int) start = (-1, -1);
             int rows = instructions.Length + 2;
             int cols = instructions[0].Length + 2;
             char[,] grid = new char[rows, cols];
@@ -30,16 +31,26 @@ namespace Day10
             }
 
             for (int i = 0; i < instructions.Length; i++)
-                
                 for (int j = 0; j < instructions[0].Length; j++)
-                    grid[i+1, j+1] = (char)(instructions[i][j]);
-            return grid;
+                {
+                    grid[i + 1, j + 1] = (char)(instructions[i][j]);
+                    if (instructions[i][j] == 'S')
+                        start = (i+1, j+1);
+                }
+                    
+            return (grid, start);
         }
+
+        
         public static void Part1Solution(string[] instructions)
         {
             Console.WriteLine("\n%%% Part 1 %%%");
-            char[,] grid = ParseGrid(instructions);
-            int maxSteps = 5;
+            (char[,], (int,int)) gridStart = ParseForGridAndStart(instructions);
+            char[,] grid = gridStart.Item1;
+            (int, int) start = gridStart.Item2;
+            TraversalHelper helper = new TraversalHelper();
+            helper.SetGrid(grid);
+            int maxSteps = helper.FindFarthestPointInMaze(start);
             Console.WriteLine(String.Format("The farthest point is {0} steps away", maxSteps));
         }
 
@@ -60,7 +71,7 @@ namespace Day10
             string[] instructionsSample = System.IO.File.ReadAllLines(samplePath);
             //string[] instructionsSample2 = System.IO.File.ReadAllLines(samplePath);
             string[] instructionsFull = System.IO.File.ReadAllLines(fullPath);
-            Part1Solution(instructionsSample);
+            Part1Solution(instructionsFull);
             Part2Solution(instructionsSample);
         }
     }

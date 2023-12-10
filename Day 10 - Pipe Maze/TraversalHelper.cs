@@ -8,16 +8,20 @@ namespace Day10
 {
     public class TraversalHelper
     {
+        public char[,] grid;
+        public void SetGrid(char[,] setGrid)
+        {
+            grid = setGrid;
+        }
         /// <summary>
         /// Finds the next step in the look
         /// </summary>
         /// <param name="previous">The previous step in the maze, so we don't go backwards</param>
         /// <param name="current">Current place in the maze</param>
-        /// <param name="grid">Maze</param>
         /// <returns></returns>
-        public static (int,int) NextStepThroughMaze((int,int) previous, (int,int) current, char[,] grid)
+        public (int,int) NextStepThroughMaze((int,int) previous, (int,int) current)
         {
-            ((int, int), (int, int)) adjacentPositions = FindAdjacentPositions(current, grid);
+            ((int, int), (int, int)) adjacentPositions = FindAdjacentPositions(current);
 
             if (adjacentPositions.Item1 == previous)
                 return adjacentPositions.Item2;
@@ -28,9 +32,8 @@ namespace Day10
         /// From a point on the grid, finds the two positions you can move to
         /// </summary>
         /// <param name="current">Current position</param>
-        /// <param name="grid">Grid</param>
         /// <returns></returns>
-        public static ((int, int), (int, int)) FindAdjacentPositions((int,int) current, char[,] grid)
+        public ((int, int), (int, int)) FindAdjacentPositions((int,int) current)
         {
             List<(int, int)> found = new List<(int, int)>();
 
@@ -38,13 +41,13 @@ namespace Day10
             int currentCol = current.Item2;
             // Check above
             char potential = grid[currentRow - 1, currentCol];
-            if (potential == '7' || potential == '|' || potential == 'F')
+            if (potential == '7' || potential == '|' || potential == 'F' || potential == 'S')
             {
                 found.Add((currentRow - 1, currentCol));
             }
             // Check right
             potential = grid[currentRow, currentCol+1];
-            if (potential == 'J' || potential == '-' || potential == '7')
+            if (potential == 'J' || potential == '-' || potential == '7' || potential == 'S')
             {
                 found.Add((currentRow, currentCol + 1));
             }
@@ -53,7 +56,7 @@ namespace Day10
             {
                 // Check left
                 potential = grid[currentRow, currentCol - 1];
-                if (potential == 'L' || potential == '-' || potential == 'F')
+                if (potential == 'L' || potential == '-' || potential == 'F' || potential == 'S')
                 {
                     found.Add((currentRow, currentCol - 1));
                 }
@@ -61,7 +64,7 @@ namespace Day10
                 {
                     // Check down
                     potential = grid[currentRow + 1, currentCol];
-                    if (potential == 'J' || potential == '|' || potential == 'L')
+                    if (potential == 'J' || potential == '|' || potential == 'L' || potential == 'S')
                     {
                         found.Add((currentRow + 1, currentCol));
                     }
@@ -71,5 +74,46 @@ namespace Day10
             ((int, int), (int, int)) returnVal = (found[0], found[1]);
             return returnVal;
         }
+
+        public int FindFarthestPointInMaze((int, int) start)
+        {
+            ((int, int), (int, int)) startOptions = FindAdjacentPositions(start);
+
+            (int, int) path1Current = startOptions.Item1;
+            (int, int) path1Previous = start;
+            List<(int, int)> path1 = new List<(int, int)> { path1Previous, path1Current };
+
+            (int, int) path2Current = startOptions.Item2;
+            (int, int) path2Previous = start;
+            List<(int, int)> path2 = new List<(int, int)> { path2Previous, path2Current };
+
+            int numSteps = 1;
+            bool foundFarthest = false;
+            while (!foundFarthest)
+            {
+                // Step paths
+                (int, int) path1Next = NextStepThroughMaze(path1Previous, path1Current);
+                path1.Add(path1Next);
+                (int, int) path2Next = NextStepThroughMaze(path2Previous, path2Current);
+                path2.Add(path2Next);
+                numSteps++;
+
+                if (path1.Contains(path2Next) || path2.Contains(path1Next))
+                {
+                    // Past the farthest point
+                    return numSteps;
+                }
+
+                // Update state
+                path1Previous = path1Current;
+                path1Current = path1Next;                
+                path2Previous = path2Current;
+                path2Current = path2Next;
+                
+            }
+            return -1;
+        }
+
+
     }
 }
