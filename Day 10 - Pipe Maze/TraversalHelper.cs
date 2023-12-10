@@ -39,40 +39,56 @@ namespace Day10
 
             int currentRow = current.Item1;
             int currentCol = current.Item2;
-            // Check above
-            char potential = grid[currentRow - 1, currentCol];
-            if (potential == '7' || potential == '|' || potential == 'F' || potential == 'S')
+            char currentChar = grid[currentRow, currentCol];
+
+            // Can we connect above?
+            if (currentChar == 'J' || currentChar == '|' || currentChar == 'L' || currentChar == 'S')
             {
-                found.Add((currentRow - 1, currentCol));
-            }
-            // Check right
-            potential = grid[currentRow, currentCol+1];
-            if (potential == 'J' || potential == '-' || potential == '7' || potential == 'S')
-            {
-                found.Add((currentRow, currentCol + 1));
-            }
-            
-            if (found.Count < 2)
-            {
-                // Check left
-                potential = grid[currentRow, currentCol - 1];
-                if (potential == 'L' || potential == '-' || potential == 'F' || potential == 'S')
+                // Check above
+                char potential = grid[currentRow - 1, currentCol];
+                if (potential == '7' || potential == '|' || potential == 'F')
                 {
-                    found.Add((currentRow, currentCol - 1));
-                }
-                if (found.Count < 2)
-                {
-                    // Check down
-                    potential = grid[currentRow + 1, currentCol];
-                    if (potential == 'J' || potential == '|' || potential == 'L' || potential == 'S')
-                    {
-                        found.Add((currentRow + 1, currentCol));
-                    }
+                    found.Add((currentRow - 1, currentCol));
                 }
             }
 
-            ((int, int), (int, int)) returnVal = (found[0], found[1]);
-            return returnVal;
+            // Can we connect right?
+            if (currentChar == 'L' || currentChar == '-' || currentChar == 'F' || currentChar == 'S')
+            {
+                // Check right
+                char potential = grid[currentRow, currentCol + 1];
+                if (potential == 'J' || potential == '-' || potential == '7')
+                {
+                    found.Add((currentRow, currentCol + 1));
+                }
+            }
+
+            // Can we connect left?
+            if (currentChar == 'J' || currentChar == '-' || currentChar == '7' || currentChar == 'S')
+            {
+                // Check left
+                char potential = grid[currentRow, currentCol - 1];
+                if (potential == 'L' || potential == '-' || potential == 'F')
+                {
+                    found.Add((currentRow, currentCol - 1));
+                }
+            }
+
+            // Can we connect down?
+            if (currentChar == '7' || currentChar == '|' || currentChar == 'F' || currentChar == 'S')
+            {
+                // Check down
+                char potential = grid[currentRow + 1, currentCol];
+                if (potential == 'J' || potential == '|' || potential == 'L')
+                {
+                    found.Add((currentRow + 1, currentCol));
+                }
+            }
+
+            if (found.Count < 2)
+                return ((found[0], found[0]));
+            else
+                return (found[0], found[1]);
         }
 
         public int FindFarthestPointInMaze((int, int) start)
