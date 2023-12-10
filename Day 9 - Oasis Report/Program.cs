@@ -80,7 +80,7 @@ namespace Day9
         {
             Console.WriteLine("\n%%% Part 1 %%%");
             int sumExtrapolated = 0;
-            foreach(string line in instructions)
+            foreach (string line in instructions)
             {
                 sumExtrapolated += Extrapolate(line);
             }
@@ -101,14 +101,14 @@ namespace Day9
         public static void Main(string[] args)
         {
             string path = @"C:\Users\Tom\Documents\Projects\Advent\2023\AdventOfCode2023\";
-            string day = "Day9 - Oasis Report";
+            string day = "Day 9 - Oasis Report";
 
             string samplePath = path + day + @"\Sample.txt";
             string samplePath2 = path + day + @"\Sample2.txt";
             string fullPath = path + day + @"\Full.txt";
             string[] instructionsSample = System.IO.File.ReadAllLines(samplePath);
             //string[] instructionsSample2 = System.IO.File.ReadAllLines(samplePath);
-             string[] instructionsFull = System.IO.File.ReadAllLines(fullPath);
+            string[] instructionsFull = System.IO.File.ReadAllLines(fullPath);
             Part1Solution(instructionsFull);
             Part2Solution(instructionsFull);
         }
