@@ -79,7 +79,7 @@ namespace Day10
             //string[] instructionsSample2 = System.IO.File.ReadAllLines(samplePath);
             string[] instructionsFull = System.IO.File.ReadAllLines(fullPath);
             Part1Solution(instructionsFull);
-            Part2Solution(instructionsSample);
+            Part2Solution(instructionsFull);
         }
     }
 }

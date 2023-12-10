@@ -95,9 +95,12 @@ namespace Day10
 
         public int FindFarthestPointInMaze((int, int) start)
         {
+            pointsOnLoop = new HashSet<(int, int)>();
             ((int, int), (int, int)) startOptions = FindAdjacentPositions(start);
+            pointsOnLoop.Add(start);
+            pointsOnLoop.Add(startOptions.Item1);
+            pointsOnLoop.Add(startOptions.Item2);
 
-            HashSet<(int, int)> pointsOnLoop = new HashSet<(int, int)>();
 
             (int, int) path1Current = startOptions.Item1;
             (int, int) path1Previous = start;
