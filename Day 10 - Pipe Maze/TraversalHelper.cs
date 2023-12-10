@@ -9,6 +9,8 @@ namespace Day10
     public class TraversalHelper
     {
         public char[,] grid;
+        public HashSet<(int, int)> pointsOnLoop = new HashSet<(int, int)>();
+
         public void SetGrid(char[,] setGrid)
         {
             grid = setGrid;
@@ -95,6 +97,8 @@ namespace Day10
         {
             ((int, int), (int, int)) startOptions = FindAdjacentPositions(start);
 
+            HashSet<(int, int)> pointsOnLoop = new HashSet<(int, int)>();
+
             (int, int) path1Current = startOptions.Item1;
             (int, int) path1Previous = start;
             List<(int, int)> path1 = new List<(int, int)> { path1Previous, path1Current };
@@ -110,8 +114,10 @@ namespace Day10
                 // Step paths
                 (int, int) path1Next = NextStepThroughMaze(path1Previous, path1Current);
                 path1.Add(path1Next);
+                pointsOnLoop.Add(path1Next);
                 (int, int) path2Next = NextStepThroughMaze(path2Previous, path2Current);
                 path2.Add(path2Next);
+                pointsOnLoop.Add(path2Next);
                 numSteps++;
 
                 if (path1.Contains(path2Next) || path2.Contains(path1Next))

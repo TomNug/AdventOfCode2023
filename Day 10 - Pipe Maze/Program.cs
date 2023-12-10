@@ -57,8 +57,15 @@ namespace Day10
         public static void Part2Solution(string[] instructions)
         {
             Console.WriteLine("\n%%% Part 2 %%%");
-            int maxSteps = 5;
-            Console.WriteLine(String.Format("The farthest point is {0} steps away", maxSteps));
+            (char[,], (int, int)) gridStart = ParseForGridAndStart(instructions);
+            char[,] grid = gridStart.Item1;
+            (int, int) start = gridStart.Item2;
+            TraversalHelper helper = new TraversalHelper();
+            helper.SetGrid(grid);
+            int maxSteps = helper.FindFarthestPointInMaze(start);
+            HashSet<(int, int)> pointsOnLoop = helper.pointsOnLoop;
+            int numTiles = Flooder.GetInsideTiles(grid, pointsOnLoop.ToList<(int,int)>());
+            Console.WriteLine(String.Format("The number of inside tiles is {0}", numTiles));
         }
         public static void Main(string[] args)
         {
