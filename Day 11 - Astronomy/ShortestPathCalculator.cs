@@ -8,13 +8,13 @@ namespace Day11
 {
     public class ShortestPathCalculator
     {
-        public static int CalculatePath((int, int) from, (int, int) to)
+        public static long CalculatePath((long, long) from, (long, long) to)
         {
             return Math.Abs(to.Item1-from.Item1) + Math.Abs(to.Item2-from.Item2);
         }
-        public static int CalculateSumOfShortestPaths(List<List<char>> gridList, List<(int,int)> galaxies)
+        public static long CalculateSumOfShortestPaths(List<(long, long)> galaxies)
         {
-            int[,] shortestPaths = new int[galaxies.Count, galaxies.Count];
+            long[,] shortestPaths = new long[galaxies.Count, galaxies.Count];
             for (int row = 0; row < shortestPaths.GetLength(0); row++)
             {
                 for (int col = 0; col < shortestPaths.GetLength(1); col++)
@@ -33,7 +33,7 @@ namespace Day11
                     }
                     else
                     {
-                        int newPath = CalculatePath(galaxies[from], galaxies[to]);
+                        long newPath = CalculatePath(galaxies[from], galaxies[to]);
                         if (newPath < shortestPaths[from, to])
                         {
                             shortestPaths[from, to] = newPath;
@@ -42,8 +42,8 @@ namespace Day11
                 }
             }
 
-            int sum = 0;
-            foreach (int dist in shortestPaths)
+            long sum = 0;
+            foreach (long dist in shortestPaths)
                 sum += dist; 
             return sum/2;
         }
