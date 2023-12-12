@@ -31,3 +31,6 @@ More **test-driven development** helped with the process. Made progress in secur
 
 ## Day 10 - Determinining connectivity of nodes on a grid based on their symbols, traversing the grid to find loops of symbols, and unreachable elements.
 **Flood-fill algorithm**, **queues**, **2D arrays**, **breadth-first search**.
+
+## Day 11 - Distances between cartesian coordinates
+**Cartesian coordinates**.
