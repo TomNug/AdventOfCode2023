@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 9 - Oasis Report", "Day
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 10 - Pipe Maze", "Day 10 - Pipe Maze\Day 10 - Pipe Maze.csproj", "{54189501-4EB9-48B6-8185-E62B9C65BDA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 11 - Astronomy", "Day 11 - Astronomy\Day 11 - Astronomy.csproj", "{C74F68F3-1C9A-4010-AC0F-043884640263}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day 11 - Astronomy", "Day 11 - Astronomy\Day 11 - Astronomy.csproj", "{C74F68F3-1C9A-4010-AC0F-043884640263}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day 12 - Hot Springs", "Day 12 - Hot Springs\Day 12 - Hot Springs.csproj", "{055EB51C-A683-4A90-AA42-70F99C70A881}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +149,14 @@ Global
 		{C74F68F3-1C9A-4010-AC0F-043884640263}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C74F68F3-1C9A-4010-AC0F-043884640263}.Release|x86.ActiveCfg = Release|Any CPU
 		{C74F68F3-1C9A-4010-AC0F-043884640263}.Release|x86.Build.0 = Release|Any CPU
+		{055EB51C-A683-4A90-AA42-70F99C70A881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055EB51C-A683-4A90-AA42-70F99C70A881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055EB51C-A683-4A90-AA42-70F99C70A881}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{055EB51C-A683-4A90-AA42-70F99C70A881}.Debug|x86.Build.0 = Debug|Any CPU
+		{055EB51C-A683-4A90-AA42-70F99C70A881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055EB51C-A683-4A90-AA42-70F99C70A881}.Release|Any CPU.Build.0 = Release|Any CPU
+		{055EB51C-A683-4A90-AA42-70F99C70A881}.Release|x86.ActiveCfg = Release|Any CPU
+		{055EB51C-A683-4A90-AA42-70F99C70A881}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
