@@ -5,10 +5,9 @@ namespace Day12
 {
     public class Program
     {
- 
         public static void Part1Solution(string[] instructions)
         {
-
+            HotSprings springs = new HotSprings(instructions);
             Console.WriteLine("\n%%% Part 1 %%%");
             Console.WriteLine(String.Format("The sum of shortest paths is {0}", 5));
         }
