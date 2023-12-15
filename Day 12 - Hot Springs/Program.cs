@@ -9,7 +9,9 @@ namespace Day12
         {
             HotSprings springs = new HotSprings(instructions);
             Console.WriteLine("\n%%% Part 1 %%%");
-            Console.WriteLine(String.Format("The sum of shortest paths is {0}", 5));
+
+            int permutations = springs.CountPermutationsOfAllSprings();
+            Console.WriteLine(String.Format("The sum of all valid permutations is {0}", permutations));
         }
 
         public static void Part2Solution(string[] instructions)
@@ -27,7 +29,7 @@ namespace Day12
             string fullPath = path + day + @"\Full.txt";
             string[] instructionsSample = System.IO.File.ReadAllLines(samplePath);
             string[] instructionsFull = System.IO.File.ReadAllLines(fullPath);
-            Part1Solution(instructionsSample);
+            Part1Solution(instructionsFull);
             Part2Solution(instructionsFull);
         }
     }

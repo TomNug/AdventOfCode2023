@@ -25,6 +25,15 @@ namespace Day12
             }
         }
 
+        public int CountPermutationsOfAllSprings()
+        {
+            int count = 0;
+            foreach (HotSpring spring in springs)
+            {
+                count += spring.CountPermutations();
+            }
+            return count;
+        }
         public List<int> findUnknownIndices (string line)
         {
             List<int> indices = new List<int>();

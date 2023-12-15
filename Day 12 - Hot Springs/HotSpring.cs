@@ -23,12 +23,20 @@ namespace Day12
         {
             List<int> hashGroupLengths = FindHashLengths(potentialSpring);
 
-            for (int i = 0; i < hashGroupLengths.Count; i++)
+            if (hashGroupLengths.Count == groupsBrokenSprings.Count)
             {
-                if (hashGroupLengths[i] != groupsBrokenSprings[i])
-                    return false;
+                for (int i = 0; i < hashGroupLengths.Count; i++)
+                {
+                    if (hashGroupLengths[i] != groupsBrokenSprings[i])
+                        return false;
+                }
+                return true;
             }
-            return true;
+            else
+            {
+                return false;
+            }
+            
         }
 
         static List<int> FindHashIndices(string input)
@@ -53,29 +61,50 @@ namespace Day12
         {
             int validPermutationCount = 0;
 
+            // Get the list of potential permutations of unknown characters
+            List<string> permutationCharacters = GeneratePermutations(uncertainIndices.Count);
 
+            // Assemble the string, inserting the permutation
+            foreach(string perm in permutationCharacters)
+            {
+                string newString = CombineReportAndPermutaton(perm);
+                if (ErrorCheckSpring(newString))
+                {
+                    validPermutationCount++;
+                }
+            }
             return validPermutationCount;
         }
 
-        static List<string> GeneratePermutations(string input)
+        private string CombineReportAndPermutaton(string perm)
         {
+            char[] newReport = conditionReport.ToCharArray();
+            for (int i = 0; i < perm.Length; i++)
+            {
+                newReport[uncertainIndices[i]] = perm[i];
+            }
+            return new string(newReport);
+        }
+        public static List<string> GeneratePermutations(int numUnknowns)
+        {
+            char[] chars = new char[numUnknowns];
             List<string> permutations = new List<string>();
-            GeneratePermutationsRecursive(input.ToCharArray(), 0, permutations);
+            GeneratePermutationsRecursive(chars, 0, permutations);
             return permutations;
         }
 
         static void GeneratePermutationsRecursive(char[] chars, int currentIndex, List<string> permutations)
         {
-            if (currentIndex == chars.Length - 1)
+            if (currentIndex == chars.Length)
             {
                 permutations.Add(new string(chars));
                 return;
             }
 
-            chars[currentIndex] = '0';
+            chars[currentIndex] = '.';
             GeneratePermutationsRecursive(chars, currentIndex + 1, permutations);
 
-            chars[currentIndex] = '1';
+            chars[currentIndex] = '#';
             GeneratePermutationsRecursive(chars, currentIndex + 1, permutations);
         }
     }
