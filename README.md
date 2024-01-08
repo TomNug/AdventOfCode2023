@@ -1,5 +1,5 @@
 # AdventOfCode2023
-My repository for my solutions for 2023's Advent of Code (https://adventofcode.com/). It is an advent calendar of programming problems. Problem descriptions have been copied into READMEs for convenience. They are not mind and belong to Advent of Code.
+My repository for my solutions for 2023's Advent of Code (https://adventofcode.com/). It is an advent calendar of programming problems. Problem descriptions have been copied into READMEs for convenience. They are not mine and belong to Advent of Code.
 
 # What I have learned
 ## Day 1 - Parsing strings for values of numeric words and characters
